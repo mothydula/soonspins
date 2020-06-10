@@ -1,24 +1,27 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
-import './App.css';
-
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Body from './components/Body'
+import Artists from './components/Artists'
+import "./Assets/css/default.min.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Col} from "react-bootstrap"
 function App() {
+  const [artists, setArtists] = useState({})
+  useEffect(()=>{
+    fetch('/artists').then(res => res.json()).then(data => {
+      setArtists(data)
+    })
+  }, [])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+
+    <Body />
+    <Artists artists={artists}/>
+
+      <Footer />
     </div>
   );
 }
