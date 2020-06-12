@@ -1,40 +1,49 @@
 import React from 'react'
-import {useRef, useState, useEffect} from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 import videojs from 'video.js'
 import VideoPlayer from './VideoPlayer'
 import TwitchPlayerOne from './TwitchPlayer'
 import 'video.js/dist/video-js.css'
-import { Container } from 'react-bootstrap'
+import { Container, Jumbotron } from 'react-bootstrap'
 import $ from 'jquery'
+import ReactTwitchEmbedVideo from "react-twitch-embed-video"
+
 const Livestream = () => {
     const [changeSource, setChangeSource] = useState(false)
     const containerRef = useRef()
-    const [videoJsOptions, setVideoJsOptions] = useState({
-        autoplay: true,
-                controls: true,
-                sources: [{
-                  src: 'https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4',
-                  type: 'video/mp4'
-                }],
-                height: $('.video-container').css("height"),
-                width: $('.video-container').css("width")
-        });
+    const [artistName, setArtistName] = useState("NULL")
     useEffect(() => {
-        console.log($('.video-container').css("height")+ " "+ $('.video-container').css("width"))
-            setChangeSource(true)
-           
-        $(".video-js").css("width", "100%")
-        $(".video-js").css("height", "100vh")
-        //videojs(Object.keys(videojs.getPlayers())[0]).src('http://techslides.com/demos/sample-videos/small.mp4')
+
+        let list = $("#twitch-embed");   // Get the <ul> element with id="myList"
+        console.log(list.childNodes)
+        let listArr= Array.prototype.slice.call(list.childNodes);
+        console.log(listArr)
+        console.log(list.childNodes.length)
+        setChangeSource(true)
+        if(list.childNodes.length > 1){
+            console.log("boo")
+            list.removeChild(list.childNodes[1]);
+        }      // Remove <ul>'s first child node (index 0)
     }, [])
-   
+    useEffect(() => {
+        let list = document.getElementById("twitch-embed");   // Get the <ul> element with id="myList"
+ 
+        setChangeSource(true)
+        if(list.childNodes.length > 1){
+            console.log("boo")
+            list.removeChild(list.childNodes[1]);
+        }  
+    }, [changeSource])
     return (
         <div >
+
             <Header />
-            <Container className="video-container" fluid ref={containerRef} style={{height: "100vh", width: "100%"}}>
-            <TwitchPlayerOne />
+
+            <Container fluid style={{ height: "100vh", backgroundColor: "#F5AD0C", color: "#BD3712" }}>
+
+                <ReactTwitchEmbedVideo channel="desertheartsrecords" width="100%" height="100%" muted={true} />
             </Container>
             <Footer />
         </div>
