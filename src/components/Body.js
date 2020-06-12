@@ -32,7 +32,7 @@ const Body = () => {
           <img
           
             className="d-block w-100"
-            src="https://media2.ntslive.co.uk/resize/1600x1600/3a9990c4-2acb-4951-97ec-4e8d0611f444_1588636800.png"
+            src="https://static.fox32chicago.com/www.fox32chicago.com/content/uploads/2019/11/GETTY-kanye-west-maga-hat-trump.jpg"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -43,7 +43,7 @@ const Body = () => {
         <Carousel.Item style={{height: "100%"}}>
           <img
             className="d-block w-100"
-            src="https://media2.ntslive.co.uk/resize/1600x1600/3a9990c4-2acb-4951-97ec-4e8d0611f444_1588636800.png"
+            src="https://static.fox32chicago.com/www.fox32chicago.com/content/uploads/2019/11/GETTY-kanye-west-maga-hat-trump.jpg"
             alt="Second slide"
           />
   
@@ -55,7 +55,7 @@ const Body = () => {
         <Carousel.Item style={{height: "100%"}}> 
           <img
             className="d-block w-100"
-            src="https://media2.ntslive.co.uk/resize/1600x1600/3a9990c4-2acb-4951-97ec-4e8d0611f444_1588636800.png"
+            src="https://static.fox32chicago.com/www.fox32chicago.com/content/uploads/2019/11/GETTY-kanye-west-maga-hat-trump.jpg"
             alt="Third slide"
           />
   

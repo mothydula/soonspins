@@ -12,4 +12,4 @@ def get_current_time():
 
 @app.route('/artists')
 def get_artists():
-    return {'guy1': "im guy 1", "guy2": "im guy 2", "so_on": "Im and so on...", "so forth": "tell em"}
+    return {'doot doot': "Known for his impeccable taste, doot doot survived WW18", "dut dut": "He received word it was time return and this is the next installment", "deut deut": "Part three was enourmous, some say", "deuce deuce": "He switched to tennis"}
