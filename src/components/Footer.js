@@ -1,11 +1,11 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+ 
 const Footer = ()=> {
     return (
-        <footer className="footer">
-      <div className="container">
-        <span className="text-muted">Place sticky footer content here.</span>
+        <footer style={{textAlign: "end"}} className="footer">
+      <div className="container-fluid">
+        © 2020 SOONSPINS 
       </div>
     </footer>
     )

@@ -23,14 +23,12 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Header />
-
             <Body />
             <Artists artists={artists} />
-
             <Footer />
           </Route>
           <Route path="/testPage" component={testPage} />
-          <Route exactpath="livestream" component={Livestream} />
+          <Route exact path="/livestream" component={Livestream} />
         </Switch>
       </Router>
 
