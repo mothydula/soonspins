@@ -13,7 +13,7 @@ const About = () => {
         $("#page-background").css("background-color", "#F5AD0C")
     }, [])
     return (
-        <div >
+        <div id="page-background">
 
             <Header />
 

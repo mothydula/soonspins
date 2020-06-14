@@ -5,7 +5,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Security, SecureRoute, ImplicitCallback } from '@okta/okta-react'
-
+import axios from 'axios'
 import 'video.js/dist/video-js.css'
 import { Container, Jumbotron, Row, Col } from 'react-bootstrap'
 import $ from 'jquery'
@@ -15,7 +15,18 @@ const Admin = () => {
     const { register, handleSubmit } = useForm();
     const {register: register2, handleSubmit: handleSubmit2} = useForm();
     const onSubmit = data => console.log(data);
-    const onSubmitTwo = data2 => console.log(data2);
+    const onSubmitTwo = twitch_username => {
+        console.log(twitch_username)
+        axios.post("/setTwitchUser/<twitch_username>", twitch_username).then(response =>
+            {
+                console.log(response)
+            })
+        .catch(
+            error=> {
+                console.log(error)
+            }
+        )
+    };
     const { authState, authService } = useOktaAuth();
     
     useEffect(() => {

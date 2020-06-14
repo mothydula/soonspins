@@ -16,16 +16,7 @@ const Livestream = () => {
     const [artistName, setArtistName] = useState("NULL")
     useEffect(() => {
 
-        /*let list = $("#twitch-embed");   // Get the <ul> element with id="myList"
-        console.log(list.childNodes)
-        let listArr= Array.prototype.slice.call(list.childNodes);
-        console.log(listArr)
-        console.log(list.childNodes.length)
-        setChangeSource(true)
-        if(list.childNodes.length > 1){
-            console.log("boo")
-            list.removeChild(list.childNodes[1]);
-        }      // Remove <ul>'s first child node (index 0)*/
+        $("body").css("background-color", "#F5AD0C")
     }, [])
     useEffect(() => {
         let list = document.getElementById("twitch-embed");   // Get the <ul> element with id="myList"
@@ -37,7 +28,7 @@ const Livestream = () => {
         }  
     }, [changeSource])
     return (
-        <div >
+        <div id="livestream-page">
 
             <Header />
 
@@ -47,9 +38,9 @@ const Livestream = () => {
                 </Container>
             </Jumbotron>
 
-            <Container fluid style={{ height: "100vh", backgroundColor: "#F5AD0C", color: "#BD3712" }}>
+            <Container fluid id="twitch-video" style={{ height: "100vh", backgroundColor: "#F5AD0C", color: "#BD3712", marginBottom: 30}}>
 
-                <ReactTwitchEmbedVideo channel="desertheartsrecords" width="100%" height="100%" muted={true} />
+                <ReactTwitchEmbedVideo  channel="desertheartsrecords" width="100%" height="100%" muted={true} />
             </Container>
             <Footer />
         </div>

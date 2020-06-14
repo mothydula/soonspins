@@ -138,7 +138,7 @@ img {
     font-style: normal;
 }
 
-#adminPage {
+#adminPage, #admin-login {
     background-color: #F5AD0C;
     color: #BD3712;
     font-family: titling-gothic-fb-wide, sans-serif;
@@ -150,4 +150,9 @@ form {
     .row {
         margin-bottom: 10px;
     }
+}
+
+#twitch-video {
+    border-width: 10px;
+    border-color: black;
 }
