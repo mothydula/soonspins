@@ -17,7 +17,7 @@ const Admin = () => {
     const onSubmit = data => console.log(data);
     const onSubmitTwo = twitch_username => {
         console.log(twitch_username)
-        axios.post("/setTwitchUser/<twitch_username>", twitch_username).then(response =>
+        axios.post("/setTwitchUser", twitch_username).then(response =>
             {
                 console.log(response)
             })
