@@ -34,24 +34,53 @@ class TwitchUsernameSchema(ma.Schema):
 twitchusername_schema = TwitchUsernameSchema()
 twitchusernames_schema = TwitchUsernameSchema(many=True)
 
-#create a username
+#About Section
+class AboutSection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    about_text = db.Column(db.String)
+    date = db.Column(db.DateTime)
 
+    def __init__(self, about_text, date):
+        self.about_text = about_text
+        self.date = date
+
+#AboutSectionSchema
+class AboutSectionSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'aboutText', 'current_date')
+
+#init schema
+aboutsection_schema = AboutSectionSchema()
+aboutsections_schema = AboutSectionSchema(many=True)
+
+#create a username
+db.create_all()
 
 @app.route('/time')
 def get_current_time():
-    return {'time': time.time()}
+    return {'time': dt.now()}
 
 @app.route('/artists')
 def get_artists():
     return {'doot doot': "Known for his impeccable taste, doot doot survived WW18", "dut dut": "He received word it was time return and this is the next installment", "deut deut": "Part three was enourmous, some say", "deuce deuce": "He switched to tennis"}
 
-@app.route('/setTwitchUser', methods=['POST'])
+@app.route('/setTwitchUser', methods=['GET'])
 def set_twitch_user():
     username = request.json['twitchUsername']
     new_twitch_username = TwitchUserName(username, dt.now())
     db.session.add(new_twitch_username)
     db.session.commit()
     return twitchusername_schema.jsonify(new_twitch_username)
+
+#set about text
+@app.route('/setAboutSection', methods=['POST'])
+def set_about_section():
+    about_text = request.json['aboutText']
+    new_about_section = AboutSection(about_text, dt.now())
+    db.session.add(new_about_section)
+    db.session.commit()
+    return aboutsection_schema.jsonify(new_about_section)
+
 @app.route('/addFeaturedArtist/<artist_data>', methods=['GET', 'POST'])
 def add_featured_artist(artist_data):
     content = request.get_json(silent=True)
@@ -65,3 +94,6 @@ def get_twitch_user():
     result = twitchusernames_schema.dump(all_twitch_users)
     print(dt.now())
     return jsonify(result)
+
+#set the about section text
+@app.rot
