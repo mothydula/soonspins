@@ -14,9 +14,10 @@ const Livestream = () => {
     const [changeSource, setChangeSource] = useState(false)
     const containerRef = useRef()
     const [artistName, setArtistName] = useState("NULL")
+    const [twitchUsername, setTwitchUsername] = useState("")
     useEffect(() => {
 
-        $("body").css("background-color", "#F5AD0C")
+        $("body").css("background-color", "black")
     }, [])
     useEffect(() => {
         let list = document.getElementById("twitch-embed");   // Get the <ul> element with id="myList"
@@ -27,20 +28,28 @@ const Livestream = () => {
             list.removeChild(list.childNodes[1]);
         }  
     }, [changeSource])
+    
+    useEffect(() => {
+        fetch('/getTwitchUser').then(res => res.json()).then(data => {
+            console.log(data)
+            setTwitchUsername(data['TwitchUser'])
+            setArtistName(data['ArtistName'])
+          })
+    }, [])
     return (
         <div id="livestream-page">
 
             <Header />
 
-            <Jumbotron fluid style={{ backgroundColor: "#F5AD0C", marginBottom: 0 }}>
+            <Jumbotron fluid style={{ backgroundColor: "black", marginBottom: 0 }}>
                 <Container>
                     <h1 className="title-h1" style={{wordWrap: "break-word"}}>WATCH {artistName}'S LIVESTREAM BELOW</h1>
                 </Container>
             </Jumbotron>
 
-            <Container fluid id="twitch-video" style={{ height: "100vh", backgroundColor: "#F5AD0C", color: "#BD3712", marginBottom: 30}}>
+            <Container fluid id="twitch-video" style={{ height: "100vh", backgroundColor: "#black", color: "white", marginBottom: 30}}>
 
-                <ReactTwitchEmbedVideo  channel="desertheartsrecords" width="100%" height="100%" muted={true} />
+                <ReactTwitchEmbedVideo  channel={twitchUsername} width="100%" height="100%" muted={true} />
             </Container>
             <Footer />
         </div>

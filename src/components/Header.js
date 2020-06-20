@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <div>
     <Navbar collapseOnSelect expand="lg">
-    <Link to="/"><Navbar.Brand><img src="https://i.ibb.co/qyyPk1R/photo5116527830748997780.jpg" style={{ height: 75, width: 150, backgroundColor: "white" }} /></Navbar.Brand></Link>
+    <Link to="/"><Navbar.Brand><img src="https://i.ibb.co/k37JC5k/soonspins4-1.png" style={{ height: 75, width: 150, }} /></Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">

@@ -2,7 +2,7 @@ body {
     
     width: 100%;
 
-    background-color: #BD3712;
+    background-color: black;
 
     
 }
@@ -35,7 +35,7 @@ img {
 }
 
 .nav-link {
-    color: #F5AD0C!important;
+    color: white!important;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -43,7 +43,7 @@ img {
     text-decoration: none;
 }
 .navbar {
-    background-color: #BD3712;
+    background-color: black;
    
 }
 .navbar-brand {
@@ -76,7 +76,7 @@ img {
       }
   }
 .title-h1 {
-    color: #BD3712;
+    color: white;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -87,16 +87,18 @@ img {
     margin-right: auto;
     margin-bottom: auto;
     margin-left: auto;
-    background-color: #F5AD0C;
+    background-color: black;
     .card-pic {
         height: 300px;
-        width: 250px;
+        width: 100%;
     }
     .card {
         width: fit-content;
-        border-width: 10px;
+        border-width: 2px;
         background-color: black;
         border-radius: 0px;
+        border-color: white;
+        padding: 20px;
         color: white;
         font-family: titling-gothic-fb-wide, sans-serif;
         font-weight: 400;
@@ -108,7 +110,7 @@ img {
   .line{
     width: 100%;
 
-    border-bottom: 5px solid black;
+    border-bottom: 5px solid white;
 
     }
 
@@ -120,7 +122,7 @@ img {
     }
 
 .footer {
-    background-color: #BD3712!important;
+    background-color: black!important;
     color: #F5AD0C!important;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
@@ -128,7 +130,7 @@ img {
 }
 .nav-link, a{
     text-decoration: none!important;
-    color: #f5ad0c!important;
+    color: white!important;
 }
 
 #about-text {
@@ -139,7 +141,7 @@ img {
 }
 
 #adminPage, #admin-login {
-    background-color: #F5AD0C;
+    background-color: black;
     color: #BD3712;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 400;

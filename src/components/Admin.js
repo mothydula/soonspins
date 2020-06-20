@@ -98,6 +98,10 @@ const Admin = () => {
                         <Col><label for="twitchUsername">Twitch Username: </label></Col>
                         <Col><input name="twitchUsername" ref={register2({ required: true})} /></Col>
                     </Row>
+                    <Row>
+                        <Col><label for="artistName">Artist Name: </label></Col>
+                        <Col><input name="artistName" ref={register2({ required: true})} /></Col>
+                    </Row>
                     <Row><input type="submit" /></Row>
                 </form>
             </Container>

@@ -9,21 +9,25 @@ import $ from 'jquery'
 const About = () => {
     const [aboutText, setAboutText] = useState("")
     useEffect(() => {
-        setAboutText("hello")
-        $("#page-background").css("background-color", "#F5AD0C")
+        $("#page-background").css("background-color", "black")
     }, [])
+  useEffect(() => {
+    fetch('/getAboutSection').then(res => res.json()).then(data => {
+      setAboutText(data['AboutText'])
+    })
+  }, [])
     return (
         <div id="page-background">
 
             <Header />
 
-            <Jumbotron fluid style={{ backgroundColor: "#F5AD0C", marginBottom: 0 }}>
+            <Jumbotron fluid style={{ backgroundColor: "black", marginBottom: 0 }}>
                 <Container>
                     <h1 className="title-h1" style={{wordWrap: "break-word"}}>ABOUT SOONSPINS</h1>
                 </Container>
             </Jumbotron>
 
-            <Container id="about-text" style={{ height: "100vh", backgroundColor: "#F5AD0C", color: "#BD3712" }}>
+            <Container id="about-text" style={{ height: "100vh", backgroundColor: "black", color: "white" }}>
                 {aboutText}
                 
             </Container>
