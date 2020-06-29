@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, Jumbotron } from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
+import MoveStuffAround from './MoveStuffAround'
 
 const Header = () => {
   return (
@@ -21,6 +21,7 @@ const Header = () => {
       </Navbar.Collapse>
     </Navbar>
     <div className="line"></div>
+    <MoveStuffAround />
     </div>
   )
 }
