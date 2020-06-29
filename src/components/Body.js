@@ -2,18 +2,27 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Carousel, Container } from 'react-bootstrap'
+import { thatReturnsArgument } from 'react-modular-audio-player';
 const Body = () => {
     const [index, setIndex] = useState(0);
-
+    const [timerToggle, setTimerToggle] = useState(true)
     const handleSelect = (selectedIndex, e) => {
+      setTimerToggle(false)
       setIndex((oldIndex)=>(oldIndex+1)%3);
+      setTimerToggle(true)
     };
     useEffect(() => {
+      if (timerToggle == true){
         setInterval(myMethod, 5000);
+      }
+        else{
+          clearInterval()
+        }
         return () => {
             clearInterval() 
         }
-    }, [])
+    }, [timerToggle])
+    
     const myMethod = ()=>{
         setIndex((oldIndex)=>(oldIndex+1)%3);
     }
