@@ -6,26 +6,14 @@ import { thatReturnsArgument } from 'react-modular-audio-player';
 const Body = () => {
     const [index, setIndex] = useState(0);
     const [timerToggle, setTimerToggle] = useState(true)
-    const handleSelect = (selectedIndex, e) => {
-      setTimerToggle(false)
-      setIndex((oldIndex)=>(oldIndex+1)%3);
-      setTimerToggle(true)
-    };
-    useEffect(() => {
-      if (timerToggle == true){
-        setInterval(myMethod, 5000);
-      }
-        else{
-          clearInterval()
-        }
-        return () => {
-            clearInterval() 
-        }
-    }, [timerToggle])
-    
     const myMethod = ()=>{
-        setIndex((oldIndex)=>(oldIndex+1)%3);
-    }
+      setIndex((oldIndex)=>(oldIndex+1)%3);
+  }
+
+    const handleSelect = (selectedIndex, e) => {
+      setIndex(selectedIndex);
+    };
+
     const [currentTime, setCurrentTime] = useState(0)
 
     useEffect(()=>{
@@ -35,10 +23,10 @@ const Body = () => {
     }, [])
     return (
       <Container fluid id="main-carousel" className="no-gutters">
-      <Carousel  activeIndex={index} onSelect={handleSelect}>
+      <Carousel  activeIndex={index} onSelect={handleSelect} interval={5000}>
         <Carousel.Item style={{height: "100%"}}>
           
-          <img
+          <img 
           
             className="d-block w-100"
             src="https://static.fox32chicago.com/www.fox32chicago.com/content/uploads/2019/11/GETTY-kanye-west-maga-hat-trump.jpg"

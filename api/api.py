@@ -3,10 +3,12 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_marshmallow import Marshmallow
+import mysql.connector
 import os
 
 #Init app
 app = Flask(__name__)
+"""
 basedir = os.path.abspath(os.path.dirname(__file__))
 # Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'db.sqlite')
@@ -75,6 +77,11 @@ performingartists_schema = PerformingArtistSchema(many=True)
 
 #create a username
 db.create_all()
+"""
+
+mydb = mysql.connector.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE")
+mycursor = mydb.cursor()
+
 
 @app.route('/time')
 def get_current_time():
@@ -87,32 +94,32 @@ def get_artists():
 @app.route('/setTwitchUser', methods=['POST'])
 def set_twitch_user():
     username = request.json['twitchUsername']
-    new_twitch_username = TwitchUserName(username, dt.now())
     artists_name = request.json['artistName']
-    new_performing_artist = PerformingArtist(artists_name, dt.now())
-    db.session.add(new_twitch_username)
-    db.session.add(new_performing_artist)
-    db.session.commit()
+    mycursor.execute(""""INSERT INTO latestTwitchUsername (username, artistName,) VALUES ( %(username)s, %(artists_name)s, now()""",
+    {'username': username,
+    'artists_name': artists_name}
+    )
+    mycursor.close()
+    mydb.close()
     
     return "worked"
 
 #set about text
-@app.route('/setAboutSection', methods=['POST'])
-def set_about_section():
-    about_text = request.json['aboutText']
-    new_about_section = AboutSection(about_text, dt.now())
-    
-    db.session.add(new_about_section)
-    db.session.commit()
-    return aboutsection_schema.jsonify(new_about_section)
-
 @app.route('/getAboutSection', methods=['GET'])
-def get_about_section():
-    about_text = db.session.query(AboutSection).order_by(desc(AboutSection.date)).first().about_text
-    db.session.commit()
-    print(about_text)
-    return {'AboutText':about_text}
+def set_about_section():
+    mycursor.execute("select * from aboutSection ORDER BY dateAdded DESC")
+    myresult = mycursor.fetchall()
+    mycursor.close()
+    mydb.close()
+    return {'AboutText' : myresult[0][1]}
 
+@app.route('/setAboutSection', methods=['POST'])
+def get_about_section():
+    mycursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( 'this is soonspins', now())")
+    mycursor.close()
+    mydb.close()
+    return True
+"""
 @app.route('/addFeaturedArtist/<artist_data>', methods=['GET', 'POST'])
 def add_featured_artist(artist_data):
     content = request.get_json(silent=True)
@@ -130,4 +137,4 @@ def get_twitch_user():
     db.session.commit()
     print(latest_twitch_user)
     return {'TwitchUser':latest_twitch_user, 'ArtistName':latest_artist_name.upper()}
-
+"""
