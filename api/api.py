@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_marshmallow import Marshmallow
 import mysql.connector
+import dbconn
 import os
 
 #Init app
@@ -79,8 +80,8 @@ performingartists_schema = PerformingArtistSchema(many=True)
 db.create_all()
 """
 
-mydb = mysql.connector.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE")
-mycursor = mydb.cursor()
+
+mycursor = dbconn.mydb.cursor()
 
 
 @app.route('/time')
@@ -100,7 +101,7 @@ def set_twitch_user():
     'artists_name': artists_name}
     )
     mycursor.close()
-    mydb.close()
+    dbconn.mydb.close()
     
     return "worked"
 
@@ -110,15 +111,15 @@ def set_about_section():
     mycursor.execute("select * from aboutSection ORDER BY dateAdded DESC")
     myresult = mycursor.fetchall()
     mycursor.close()
-    mydb.close()
+    dbconn.mydb.close()
     return {'AboutText' : myresult[0][1]}
 
 @app.route('/setAboutSection', methods=['POST'])
 def get_about_section():
     mycursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( 'this is soonspins', now())")
     mycursor.close()
-    mydb.close()
-    return True
+    dbconn.mydb.close()
+    return "worked"
 """
 @app.route('/addFeaturedArtist/<artist_data>', methods=['GET', 'POST'])
 def add_featured_artist(artist_data):
