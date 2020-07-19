@@ -72,7 +72,7 @@ const Artists = (props) => {
   ]
 
   return (
-    <div>
+    <div style={{width: "100%"}}>
       <div className="line"></div>
 
           <div style={{ backgroundColor: "grey", borderWidth: 2, borderColor: "white", padding: 5, width: "100%" }}>
@@ -87,19 +87,19 @@ const Artists = (props) => {
             />
           </div>
           <div className="line"></div>
-      <Col>
+      
         
-        <Jumbotron fluid style={{ backgroundColor: "black", marginBottom: 0 }}>
+        <Jumbotron id="featured-artists" fluid style={{ marginBottom: 0 }}>
           <Container>
             <h1 className="title-h1">FEATURED ARTISTS</h1>
           </Container>
         </Jumbotron>
-        <Row lg={4} ref={rowRef} className="artist-row" style={{ width: "100%" }}>
+        <Row lg={4} ref={rowRef} className="artist-row" style={{ width: "100%", padding: 15}}>
 
           {Object.entries(artists).map((entry, i) =>
 
-            <Col style={{ marginBottom: 30 }}>
-              <Card style={{ width: "100%", height: "100%", marginBottom: 5 }}>
+            
+              <Card className= "soonspins-card" style={{  marginBottom: 15 }}>
                 <Card.Img variant="top" src="https://i.ibb.co/YDdYMJt/MXaZMwX.png" className="card-pic" />
                 <Card.Body >
                   <Card.Title style={{ fontWeight: 700 }}>{entry[0]}</Card.Title>
@@ -110,12 +110,12 @@ const Artists = (props) => {
                   <Button style={{ backgroundColor: "transparent", borderColor: "white", borderRadius: 0 }}>Learn more.</Button>
                 </Card.Body>
               </Card>
-            </Col>
+       
           )}
         </Row>
         <div className="line"></div>
         
-      </Col>
+    
     </div>
   )
 }

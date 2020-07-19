@@ -22,7 +22,7 @@ const Body = () => {
       })
     }, [])
     return (
-      <Container fluid id="main-carousel" className="no-gutters">
+      <Container fluid id="main-carousel" className="no-gutters" style={{width: "100%"}}>
       <Carousel  activeIndex={index} onSelect={handleSelect} interval={5000}>
         <Carousel.Item style={{height: "100%"}}>
           

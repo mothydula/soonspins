@@ -2,9 +2,9 @@ body {
     
     width: 100%;
 
-    background-color: #DA5822;
-
-    
+    /*background-color: #4C4241;*/
+    background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff.png?authuser=2");
+    background-size: cover;
 }
 #main-carousel{
     width: 100%;
@@ -43,8 +43,8 @@ img {
     text-decoration: none;
 }
 .navbar {
-    background-color: black;
-   
+    background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff_navbar.png?authuser=2");;
+    background-size: cover;
 }
 .navbar-brand {
     color: white!important;
@@ -87,7 +87,6 @@ img {
     margin-right: auto;
     margin-bottom: auto;
     margin-left: auto;
-    background-color: #DA5822;
     .card-pic {
         height: 300px;
         width: 100%;
@@ -157,4 +156,16 @@ form {
 #twitch-video {
     border-width: 10px;
     border-color: black;
+}
+
+.soonspins-card {
+    background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff_cards.png?authuser=2");
+}
+
+#featured-artists {
+    background: none;
+}
+
+.navbar-toggler-icon {
+    color: white;
 }
