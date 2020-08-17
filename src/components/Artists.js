@@ -1,16 +1,21 @@
 import React, { useRef, useEffect, useState } from 'react'
 import ReactPlayer from 'react-player'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Card, Col, Button, Jumbotron, Container, CardDeck } from 'react-bootstrap'
+import { Row, Card, Col, Button, Jumbotron, Container, CardDeck, CardColumns } from 'react-bootstrap'
 import ReactAudioPlayer from 'react-audio-player';
 import AudioPlayer from 'react-modular-audio-player';
 import Artist from './Artist'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPause } from '@fortawesome/free-solid-svg-icons'
+import $ from "jquery"
 const Artists = (props) => {
   const artists = props.artists
   const rowRef = useRef()
   const [rowHeight, setRowHeight] = useState(0)
   let i = 0
-
+  useEffect(() => {
+    $("#play-icon").html("<FontAwesomeIcon icon={faEllipsisH } color='white' />")
+  }, [])
   let playlist = [
     {
       src: "https://storage.cloud.google.com/song-files/kaizer%20song%20release.wav?authuser=2",
@@ -24,10 +29,6 @@ const Artists = (props) => {
     }
   ];
 
-  useEffect(() => {
-    console.log(rowRef.current.style.height)
-
-  }, [])
   useEffect(() => {
     console.log()
   }, [rowHeight])
@@ -72,34 +73,31 @@ const Artists = (props) => {
   ]
 
   return (
-    <div style={{width: "100%"}}>
+    <Container fluid>
       <div className="line"></div>
 
-          <div style={{ backgroundColor: "grey", borderWidth: 2, borderColor: "white", padding: 5, width: "100%" }}>
-            <AudioPlayer
-              fontColor="white"
+      <div style={{ background: "none", width: "100%", position: "relative" }}>
+        <AudioPlayer
+          fontColor="white"
 
-              audioFiles={playlist}
-              playerWidth="fit-content"
-              fontSize="15px"
-              iconSize="1.5rem"
-              fontFamily="titling-gothic-fb-wide, sans-serif"
-            />
-          </div>
-          <div className="line"></div>
-      
-        
-        <Jumbotron id="featured-artists" fluid style={{ marginBottom: 0 }}>
-          <Container>
-            <h1 className="title-h1">FEATURED ARTISTS</h1>
-          </Container>
-        </Jumbotron>
-        <Row lg={4} ref={rowRef} className="artist-row" style={{ width: "100%", padding: 15}}>
+          audioFiles={playlist}
+          playerWidth="fit-content"
+          fontSize="15px"
+          iconSize="1.5rem"
+          fontFamily="titling-gothic-fb-wide, sans-serif"
+        />
+      </div>
+          <Jumbotron id="featured-artists" fluid style={{ marginBottom: 0 }}>
+            <Container>
+              <h1 className="title-h1">SOONSPINS SPACE</h1>
+            </Container>
+          </Jumbotron>
+        <Row ref={rowRef} className="artist-row" style={{ width: "100%", padding: 15, }}>
 
           {Object.entries(artists).map((entry, i) =>
 
-            
-              <Card className= "soonspins-card" style={{  marginBottom: 15 }}>
+            <Col md={3} style={{ marginBottom: 15 }}>
+              <Card className="soonspins-card" style={{ marginBottom: 15, width: "100%", height: "100%" }}>
                 <Card.Img variant="top" src="https://i.ibb.co/YDdYMJt/MXaZMwX.png" className="card-pic" />
                 <Card.Body >
                   <Card.Title style={{ fontWeight: 700 }}>{entry[0]}</Card.Title>
@@ -110,13 +108,11 @@ const Artists = (props) => {
                   <Button style={{ backgroundColor: "transparent", borderColor: "white", borderRadius: 0 }}>Learn more.</Button>
                 </Card.Body>
               </Card>
-       
+            </Col>
           )}
         </Row>
-        <div className="line"></div>
-        
-    
-    </div>
+      <div className="line"></div>
+    </Container>
   )
 }
 

@@ -1,11 +1,12 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Carousel, Container } from 'react-bootstrap'
+import { Row, Carousel, Container, Section } from 'react-bootstrap'
 import { thatReturnsArgument } from 'react-modular-audio-player';
 const Body = () => {
     const [index, setIndex] = useState(0);
     const [timerToggle, setTimerToggle] = useState(true)
+    
     const myMethod = ()=>{
       setIndex((oldIndex)=>(oldIndex+1)%3);
   }

@@ -4,83 +4,12 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_marshmallow import Marshmallow
 import mysql.connector
+import pymysql.cursors
 import os
 
 #Init app
 app = Flask(__name__)
-"""
-basedir = os.path.abspath(os.path.dirname(__file__))
-# Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir, 'db.sqlite')
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#Init db
-db = SQLAlchemy(app)
-#Init marshmallow
-ma = Marshmallow(app)
 
-#Twitch Username
-class TwitchUserName(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String)
-    date = db.Column(db.DateTime)
-
-    def __init__(self, username, date):
-        self.username = username
-        self.date = date
-
-#TwitchUsernameSchema
-class TwitchUsernameSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'username', 'current_date')
-
-#init schema
-twitchusername_schema = TwitchUsernameSchema()
-twitchusernames_schema = TwitchUsernameSchema(many=True)
-
-#About Section
-class AboutSection(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    about_text = db.Column(db.String)
-    date = db.Column(db.DateTime)
-
-    def __init__(self, about_text, date):
-        self.about_text = about_text
-        self.date = date
-
-#AboutSectionSchema
-class AboutSectionSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'aboutText', 'current_date')
-
-#init schema
-aboutsection_schema = AboutSectionSchema()
-aboutsections_schema = AboutSectionSchema(many=True)
-
-#About Section
-class PerformingArtist(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    artist_name = db.Column(db.String)
-    date = db.Column(db.DateTime)
-
-    def __init__(self, artist_name, date):
-        self.artist_name = artist_name
-        self.date = date
-
-#AboutSectionSchema
-class PerformingArtistSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'artist_name', 'current_date')
-
-#init schema
-performingartist_schema = PerformingArtistSchema()
-performingartists_schema = PerformingArtistSchema(many=True)
-
-#create a username
-db.create_all()
-"""
-
-mydb = mysql.connector.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE")
-mycursor = mydb.cursor()
 
 
 @app.route('/time')
@@ -93,32 +22,57 @@ def get_artists():
 
 @app.route('/setTwitchUser', methods=['POST'])
 def set_twitch_user():
+    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
     username = request.json['twitchUsername']
     artists_name = request.json['artistName']
-    mycursor.execute(""""INSERT INTO latestTwitchUsername (username, artistName,) VALUES ( %(username)s, %(artists_name)s, now()""",
-    {'username': username,
-    'artists_name': artists_name}
-    )
-    mycursor.close()
-    mydb.close()
-    
-    return "worked"
+    try:
+        with connection.cursor() as cursor:
+            sql = ("INSERT INTO twitchArtists (username, artistName, dateAdded) VALUES ('{}', '{}', {})".format(username, artists_name, 'now()'))
+            cursor.execute(sql)
+        connection.commit()
+        connection.close()
+        return "success"
+    except:
+        print("SQL problem has occured")
+        return "failed"
 
-#set about text
+@app.route('/getTwitchUser', methods=['GET'])
+def get_twitch_user():
+    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("select * from twitchArtists ORDER BY dateAdded DESC limit 0,1")
+            result = cursor.fetchone()
+        connection.close()
+        return result
+    except:
+        print("SQL problem has occured")
+        return "failed"
+
 @app.route('/getAboutSection', methods=['GET'])
-def set_about_section():
-    mycursor.execute("select * from aboutSection ORDER BY dateAdded DESC")
-    myresult = mycursor.fetchall()
-    mycursor.close()
-    mydb.close()
-    return {'AboutText' : myresult[0][1]}
+def get_about_section():
+    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("select * from aboutSection ORDER BY dateAdded DESC limit 0,1")
+            result = cursor.fetchone()
+        connection.close()
+        return result
+    except:
+            print("SQL problem has occured")
+            return "failed"
 
 @app.route('/setAboutSection', methods=['POST'])
-def get_about_section():
-    mycursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( 'this is soonspins', now())")
-    mycursor.close()
-    mydb.close()
-    return "worked"
+def set_about_section():
+    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( 'this is soonspins', now())")
+        connection.commit()
+        connection.close()
+        return "success"
+    except:
+        return "failed"
 """
 @app.route('/addFeaturedArtist/<artist_data>', methods=['GET', 'POST'])
 def add_featured_artist(artist_data):

@@ -15,14 +15,12 @@ const Header = () => {
         <Nav className="mr-auto">
           <Nav.Link><Link to="/about">ABOUT</Link></Nav.Link>
           <Nav.Link href="#features">ARCHIVES</Nav.Link>
-          <Nav.Link href="#pricing">CONTACT US</Nav.Link>
-          <Nav.Link><Link to="/livestream">LIVESTREAM</Link></Nav.Link>
+          <Nav.Link><Link to="/livestream">PERFORMANCES</Link></Nav.Link>
         </Nav>
 
       </Navbar.Collapse>
     </Navbar>
-    <div className="line"></div>
-    <MoveStuffAround />
+    <div className="line" style={{color: "#F5AD0C!important"}}></div>
     </div>
   )
 }

@@ -14,7 +14,7 @@ const About = () => {
   useEffect(() => {
     fetch('/getAboutSection').then(res => res.json()).then(data => {
         console.log(data)
-      setAboutText(data['AboutText'])
+        setAboutText(data['aboutText'])
     })
   }, [])
     return (
