@@ -28,8 +28,9 @@ const About = () => {
                 </Container>
             </Jumbotron>
 
-            <Container id="about-text" style={{ height: "100vh", backgroundColor: "black", color: "white" }}>
-                {aboutText}
+            <Container id="about-text" style={{ height: "100vh", backgroundColor: "black", color: "white", WebkitAlignItems: "center"}}>
+                <p style={{textAlign: "left", margin: "0 auto", position: "relative", width: "75%"}}>{aboutText}</p>
+                
                 
             </Container>
             <Footer />

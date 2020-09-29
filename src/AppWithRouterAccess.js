@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Body from './components/Body'
+import SoundPlayer from './components/SoundPlayer'
 import Artists from './components/Artists'
 import testPage from './components/testPage'
 import Livestream from './components/Livestream'
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/">
               <Header />
               <Body />
+              <SoundPlayer />
               <Artists artists={artists} />
               <Footer />
             </Route>

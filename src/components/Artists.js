@@ -73,25 +73,12 @@ const Artists = (props) => {
   ]
 
   return (
-    <Container fluid>
-      <div className="line"></div>
-
-      <div style={{ background: "none", width: "100%", position: "relative" }}>
-        <AudioPlayer
-          fontColor="white"
-
-          audioFiles={playlist}
-          playerWidth="fit-content"
-          fontSize="15px"
-          iconSize="1.5rem"
-          fontFamily="titling-gothic-fb-wide, sans-serif"
-        />
-      </div>
-          <Jumbotron id="featured-artists" fluid style={{ marginBottom: 0 }}>
-            <Container>
-              <h1 className="title-h1">SOONSPINS SPACE</h1>
+    <Container>
+      <Row>
+            <Container id="featured-artists" fluid style={{ marginBottom: 0, textAlign: "center", padding: 15, paddingTop: 30 }}>
+              <h1 className="title-h1" style={{fontSize: "2rem"}}>SOONSPINS SPACE</h1>
             </Container>
-          </Jumbotron>
+          </Row>
         <Row ref={rowRef} className="artist-row" style={{ width: "100%", padding: 15, }}>
 
           {Object.entries(artists).map((entry, i) =>

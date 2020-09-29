@@ -3,12 +3,17 @@ from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_marshmallow import Marshmallow
+from google.cloud import storage
 import mysql.connector
 import pymysql.cursors
 import os
 
 #Init app
 app = Flask(__name__)
+dirname = os.path.dirname(__file__)
+filename = os.path.join(dirname, 'soonspins-site-98aa805e42a7.json')
+storage_client = storage.Client.from_service_account_json(filename)
+bucket = storage_client.get_bucket("soonspins_site_images")
 
 
 
@@ -51,6 +56,7 @@ def get_twitch_user():
 
 @app.route('/getAboutSection', methods=['GET'])
 def get_about_section():
+    print(f'BUCKET: {list(storage_client.list_blobs(bucket))}')
     connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
@@ -65,9 +71,10 @@ def get_about_section():
 @app.route('/setAboutSection', methods=['POST'])
 def set_about_section():
     connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    about_text = request.json["aboutText"]
     try:
         with connection.cursor() as cursor:
-            cursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( 'this is soonspins', now())")
+            cursor.execute("INSERT INTO aboutSection (aboutText, dateAdded) VALUES ( '{}', {})".format(about_text, 'now()'))
         connection.commit()
         connection.close()
         return "success"

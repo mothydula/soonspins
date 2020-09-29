@@ -47,14 +47,14 @@ const LoginForm = ({ issuer }) => {
 
 
     return (
-        <div id="admin-login">
+        <div id="admin-login" style={{backgroundColor: "#F5AD0C"}}>
             <Header />
             <Jumbotron fluid style={{ backgroundColor: "#F5AD0C", marginBottom: 0 }}>
                 <Container>
                     <h1 className="title-h1">ADMIN PANEL LOGIN</h1>
                 </Container>
             </Jumbotron>
-            <Container>
+            <Container style={{backgroundColor: "#F5AD0C"}}>
                 <form onSubmit={handleSubmit}>
                     <Row>
                         <Col>

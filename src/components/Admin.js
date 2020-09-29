@@ -57,7 +57,7 @@ const Admin = () => {
 
     return (
 
-        <div id="adminPage">
+        <div id="adminPage" style={{backgroundColor: "#F5AD0C"}}>
             <Header />
             <Jumbotron fluid style={{ backgroundColor: "#F5AD0C", marginBottom: 0 }}>
                     <Container>
