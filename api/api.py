@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
 from flask_marshmallow import Marshmallow
@@ -10,24 +11,33 @@ import os
 
 #Init app
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'soonspins-site-98aa805e42a7.json')
 storage_client = storage.Client.from_service_account_json(filename)
 bucket = storage_client.get_bucket("soonspins_site_images")
 
 
+@app.route("/")
+@cross_origin()
+def index():
+    return jsonify({"response": "This is a proof of concept"})
 
 @app.route('/time')
+@cross_origin()
 def get_current_time():
     return {'time': dt.now()}
 
 @app.route('/artists')
+@cross_origin()
 def get_artists():
     return {'darn dootin':"you\'re destidoot", 'darn doot':"you\'re destidoot", 'doot doot': "Known for his impeccable taste, doot doot survived WW18", "dut dut": "He received word it was time return and this is the next installment", "deut deut": "Part three was enourmous, some say", "deuce deuce": "He switched to tennis"}
 
 @app.route('/setTwitchUser', methods=['POST'])
+@cross_origin()
 def set_twitch_user():
-    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host="34.94.174.27", user="root", database="SOONSPINS_SITE", ssl={'ssl' : {'ca': '/server-ca.pem', 'key': '/client-key.pem', 'cert': '/client-cert.pem', }}, cursorclass=pymysql.cursors.DictCursor)
     username = request.json['twitchUsername']
     artists_name = request.json['artistName']
     try:
@@ -42,8 +52,9 @@ def set_twitch_user():
         return "failed"
 
 @app.route('/getTwitchUser', methods=['GET'])
+@cross_origin()
 def get_twitch_user():
-    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host="34.94.174.27", user="root", database="SOONSPINS_SITE", ssl={'ssl' : {'cert': 'client-cert.pem', 'key': 'client-key.pem', 'ca': 'server-ca.pem'}}, cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
             cursor.execute("select * from twitchArtists ORDER BY dateAdded DESC limit 0,1")
@@ -55,9 +66,9 @@ def get_twitch_user():
         return "failed"
 
 @app.route('/getAboutSection', methods=['GET'])
+@cross_origin()
 def get_about_section():
-    print(f'BUCKET: {list(storage_client.list_blobs(bucket))}')
-    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host="34.94.174.27", user="timothylukau", password="only-you", database="SOONSPINS_SITE", ssl={'ssl' : {'ca': '/certs/server-ca.pem', 'key': '/certs/client-key.pem', 'cert': '/certs/client-cert.pem'}}, cursorclass=pymysql.cursors.DictCursor)
     try:
         with connection.cursor() as cursor:
             cursor.execute("select * from aboutSection ORDER BY dateAdded DESC limit 0,1")
@@ -69,8 +80,9 @@ def get_about_section():
             return "failed"
 
 @app.route('/setAboutSection', methods=['POST'])
+@cross_origin()
 def set_about_section():
-    connection = pymysql.connect(host="34.94.174.27", user="developer", passwd="refreshe-me-bruh", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
+    connection = pymysql.connect(host="34.94.174.27", user="root", database="SOONSPINS_SITE", cursorclass=pymysql.cursors.DictCursor)
     about_text = request.json["aboutText"]
     try:
         with connection.cursor() as cursor:

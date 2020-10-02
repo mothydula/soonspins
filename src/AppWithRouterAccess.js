@@ -18,7 +18,7 @@ import { Security, SecureRoute, ImplicitCallback, LoginCallback } from '@okta/ok
 function App() {
   const [artists, setArtists] = useState({})
   useEffect(() => {
-    fetch('/artists').then(res => res.json()).then(data => {
+    fetch('https://soonspins.herokuapp.com/artists').then(res => res.json()).then(data => {
       setArtists(data)
     })
   }, [])

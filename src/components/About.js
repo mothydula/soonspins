@@ -12,7 +12,7 @@ const About = () => {
         $("#page-background").css("background-color", "black")
     }, [])
   useEffect(() => {
-    fetch('/getAboutSection').then(res => res.json()).then(data => {
+    fetch('https://soonspins.herokuapp.com/getAboutSection').then(res => res.json()).then(data => {
         console.log(data)
         setAboutText(data['aboutText'])
     })

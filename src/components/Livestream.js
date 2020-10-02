@@ -29,7 +29,7 @@ const Livestream = () => {
     useEffect(() => {
         let unmounted = false
 
-        fetch('/getTwitchUser').then(res => res.json()).then(data => {
+        fetch('https://soonspins.herokuapp.com/getTwitchUser').then(res => res.json()).then(data => {
             if (!unmounted) {
                 console.log(data)
                 setTwitchUsername(data['username'])

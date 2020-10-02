@@ -19,7 +19,7 @@ const Admin = () => {
     const onSubmit = data => console.log(data);
     const onSubmitTwo = twitch_username => {
         console.log(twitch_username)
-        axios.post("/setTwitchUser", twitch_username).then(response =>
+        axios.post("https://soonspins.herokuapp.com/setTwitchUser", twitch_username).then(response =>
             {
                 console.log(response)
             })
@@ -31,7 +31,7 @@ const Admin = () => {
     };
     const onSubmitThree = about_text =>{
         console.log(about_text)
-        axios.post("/setAboutSection", about_text).then(response =>
+        axios.post("https://soonspins.herokuapp.com/setAboutSection", about_text).then(response =>
             {
                 console.log(response)
             })
