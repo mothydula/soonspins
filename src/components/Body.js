@@ -18,7 +18,7 @@ const Body = () => {
   const listenRef = useRef();
   const [listenText, setListenText] = useState("Listen Now")
   const [mediaPlayerToggle, setMediaPLayerToggle] = useState(false);
-  const cardStyle= {margin: "0 auto"}
+  const cardStyle = { margin: "0 auto" }
   const myMethod = () => {
     setIndex((oldIndex) => (oldIndex + 1) % 3);
   }
@@ -38,11 +38,25 @@ const Body = () => {
       $("#audioContainer").slideDown("fast")
       setListenText("Hide")
       setMediaPLayerToggle(true);
+      var millisecondsToWait = 1000;
+      setTimeout(function () {
+        // Whatever you want to do after the wait
+      }, millisecondsToWait);
+      window.scrollBy({
+        top: 100,
+        left: 0,
+        behavior: 'smooth'
+      });
     }
     else {
       let sounds = document.getElementsByTagName('audio');
       let i = 0;
-      for(i=0; i<sounds.length; i++) sounds[i].pause();
+      for (i = 0; i < sounds.length; i++) sounds[i].pause();
+      window.scrollBy({
+        top: -100,
+        left: 0,
+        behavior: 'smooth'
+      });
       $("#audioContainer").slideUp("fast")
       setListenText("Listen Now")
       setMediaPLayerToggle(false);
@@ -57,12 +71,12 @@ const Body = () => {
       console.log("You fail winger")
       let player = document.getElementById("audioContainer");
       player.scrollIntoView();
-      
+
     }
     else {
       let sounds = document.getElementsByTagName('audio');
       let i = 0;
-      for(i=0; i<sounds.length; i++) sounds[i].pause();
+      for (i = 0; i < sounds.length; i++) sounds[i].pause();
       $("#audioContainer").slideUp("fast")
       setListenText("Listen Now")
       setMediaPLayerToggle(false);
@@ -107,28 +121,28 @@ const Body = () => {
         </Container>
       </BrowserView>
       <MobileView>
-        <Col style={{alignItems: "center"}}>
+        <Col style={{ alignItems: "center" }}>
           <Row>
             <Card className="soonspins-card">
               <Card.Img variant="top" src="kp_large.JPG" />
               <Card.Body>
                 <Card.Title>DJ KPMADMAN MIX COMING SOON</Card.Title>
                 <Card.Text>
-                Wednesday September 30th 7PM
+                  Wednesday September 30th 7PM
     </Card.Text>
-    <Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>
+                <Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>
               </Card.Body>
             </Card>
           </Row>
           <Row>
             <Card className="soonspins-card">
-            <Player>
+              <Player>
                 <source src="trailer_final.mp4" />
               </Player>
               <Card.Body>
                 <Card.Title>WELCOME TO SOONSPINS</Card.Title>
                 <Card.Text>
-                Press play to watch
+                  Press play to watch
     </Card.Text>
               </Card.Body>
             </Card>
