@@ -44,7 +44,7 @@ function App() {
               <Artists artists={artists} />
               <Footer />
             </Route>
-            <Route path="/testPage" component={testPage} />
+            <Route path="/coming-soon" component={testPage} />
             <Route exact path="/livestream" component={Livestream} />
             <Route exact path="/about" component={About} />
             <SecureRoute exact path="/admin" component={Admin} />

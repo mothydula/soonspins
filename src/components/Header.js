@@ -9,12 +9,12 @@ const Header = () => {
   return (
     <div>
     <Navbar collapseOnSelect expand="lg">
-    <Link to="/"><Navbar.Brand><img src="https://i.ibb.co/k37JC5k/soonspins4-1.png" style={{ height: 75, width: 150, }} /></Navbar.Brand></Link>
+    <Link to="/"><Navbar.Brand><img src="soonspins.png" style={{ height: 100, width: 200, }} /></Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav"><FontAwesomeIcon icon={faEllipsisH } color="white" /></Navbar.Toggle>
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link><Link to="/about">ABOUT</Link></Nav.Link>
-          <Nav.Link href="#features">ARCHIVES</Nav.Link>
+          <Nav.Link ><Link to="/coming-soon">ARCHIVES</Link></Nav.Link>
           <Nav.Link><Link to="/livestream">PERFORMANCES</Link></Nav.Link>
         </Nav>
 

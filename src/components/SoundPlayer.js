@@ -7,9 +7,9 @@ import { Row, Carousel, Container, Section } from 'react-bootstrap'
 
 const SoundPlayer = () => {
     let playlist = [
-        { src: "https://storage.cloud.google.com/song-files/kaizer%20song%20release.wav?authuser=2",
-          title: "Kaizer's Song",
-          artist: "Kaizer" },
+        { src: "peanutbutter_society_12.mp3",
+          title: "PB SOCIETY 12",
+          artist: "Tim" },
       ];
 
     useEffect(() => {
@@ -24,10 +24,10 @@ const SoundPlayer = () => {
       fontSize="1.5rem"
       iconSize="1.5rem"
       sliderClass="my-slider"
-      playIcon="https://storage.cloud.google.com/soonspins_site_images/play-button-arrowhead.svg?authuser=2"
-      playHoverIcon="https://storage.cloud.google.com/soonspins_site_images/play-button-arrowhead.svg?authuser=2"
-      pauseIcon="https://storage.cloud.google.com/soonspins_site_images/pause-multimedia-big-gross-symbol-lines.svg?authuser=2"
-      pauseHoverIcon="https://storage.cloud.google.com/soonspins_site_images/pause-multimedia-big-gross-symbol-lines.svg?authuser=2"
+      playIcon="play-button-arrowhead.svg"
+      playHoverIcon="play-button-arrowhead.svg"
+      pauseIcon="pause-multimedia-big-gross-symbol-lines.svg"
+      pauseHoverIcon="pause-multimedia-big-gross-symbol-lines.svg"
     />
         </Container>
     );

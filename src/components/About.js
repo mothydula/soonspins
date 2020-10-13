@@ -5,6 +5,7 @@ import Footer from './Footer'
 import 'video.js/dist/video-js.css'
 import { Container, Jumbotron, Row } from 'react-bootstrap'
 import $ from 'jquery'
+import {BrowserView, MobileView} from 'react-device-detect';
 
 const About = () => {
     const [aboutText, setAboutText] = useState("")
@@ -28,10 +29,14 @@ const About = () => {
                 </Container>
             </Jumbotron>
 
-            <Container id="about-text" style={{ height: "100vh", backgroundColor: "black", color: "white", WebkitAlignItems: "center"}}>
-                <p style={{textAlign: "left", margin: "0 auto", position: "relative", width: "75%"}}>{aboutText}</p>
-                
-                
+            <Container fluid id="about-text" style={{ height: "100vh", backgroundColor: "black", color: "white", WebkitAlignItems: "center", textAlign: "center"}}>
+                <p style={{textAlign: "left", margin: "0 auto", position: "relative", width: "50%", fontSize: "large", marginBottom: "15px"}}>
+                    {/*aboutText*/}
+                    Here at SOONSPINS our goal is to present the masses with high quality sounds and and high quality visuals. Inspired by a variety of mediums, SOONSPINS is truly independent and an ode to underground culture. 
+                </p>
+                <BrowserView>
+                    <img src="/soonspins_2.png" height="20%" width="25%" alt="" style={{}}/>
+                </BrowserView>
             </Container>
             <Footer />
         </div>

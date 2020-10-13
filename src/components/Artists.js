@@ -33,45 +33,6 @@ const Artists = (props) => {
     console.log()
   }, [rowHeight])
 
-  let rearrangedPlayer = [
-    {
-      className: "tier-top",
-      style: { margin: "0.3rem" },
-      innerComponents: [
-        {
-          type: "play",
-          style: { width: "fit-content" }
-        },
-        {
-          type: "rewind",
-          style: { width: "fit-content" }
-        },
-        {
-          type: "forward",
-          style: { width: "fit-content" }
-        },
-        {
-          type: "volume"
-        }
-      ]
-    },
-    {
-      className: "tier-bottom",
-      style: { margin: "0rem 0.3rem 0.3rem 0.3rem" },
-      innerComponents: [
-
-        {
-          type: "time",
-          style: { width: "fit-content" }
-        },
-        {
-          type: "seek"
-        }
-
-      ]
-    }
-  ]
-
   return (
     <Container fluid>
       <Row>
@@ -98,7 +59,6 @@ const Artists = (props) => {
             </Col>
           )}
         </Row>
-      <div className="line"></div>
     </Container>
   )
 }

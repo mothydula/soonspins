@@ -2,8 +2,11 @@ body {
     /*width: 100%;*/
     /*background-color: #4C4241;*/
     /*background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff.png?authuser=2");*/
-    background-size: cover;
-    background-color: #F9B012;
+    /*background-size: cover;
+    background-color: #F9B012;*/
+    background-color: #f9b012;
+    background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
 }
 #main-carousel{
@@ -24,7 +27,7 @@ body {
     height: 100%;
 }
 img {
-    height: -webkit-fill-available;
+    /*height: -webkit-fill-available;*/
 }
 
 .carousel-inner {
@@ -52,13 +55,15 @@ img {
     text-decoration: none;
     
     img {
-        border-style: solid;
+        /*border-style: solid;
         border-width: 5px;
-        border-color: black;
+        border-color: black;*/
     }
 }
 
-
+.carousel-height {
+  height: 100%;
+}
 .imageContainer {
     width: 100px;
     height: 100px;
@@ -97,6 +102,7 @@ img {
         width: fit-content;
         border-width: 0px;
         background-color: #F74209!important;
+        background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
         border-radius: 0px;
         border-color: white;
         padding: 20px;
@@ -161,7 +167,17 @@ form {
 }
 
 .soonspins-card {
-
+  width: fit-content;
+  border-width: 0px;
+  background-color: #F74209!important;
+  background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+  border-radius: 0px;
+  border-color: white;
+  padding: 20px;
+  margin: 10px;
+  color: white;
+  font-family: titling-gothic-fb-wide, sans-serif;
+  font-weight: 400;
 }
 
 #featured-artists {
@@ -275,7 +291,7 @@ input[type=range].my-slider {
           content: url("https://storage.cloud.google.com/soonspins_site_images/rewind.svg?authuser=2")!important;
       }
       #volume-icon {
-          content: url("https://storage.cloud.google.com/soonspins_site_images/volume.svg?authuser=2")!important;
+          content: url("volume.svg")!important;
           margin-right: 5px;
       }
       #loop-icon {
