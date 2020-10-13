@@ -23,6 +23,7 @@ const SoundPlayer = () => {
       playerWidth="100%"
       fontSize="1.5rem"
       iconSize="1.5rem"
+      id="audioz"
       sliderClass="my-slider"
       playIcon="play-button-arrowhead.svg"
       playHoverIcon="play-button-arrowhead.svg"

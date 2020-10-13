@@ -40,6 +40,9 @@ const Body = () => {
       setMediaPLayerToggle(true);
     }
     else {
+      let sounds = document.getElementsByTagName('audio');
+      let i = 0;
+      for(i=0; i<sounds.length; i++) sounds[i].pause();
       $("#audioContainer").slideUp("fast")
       setListenText("Listen Now")
       setMediaPLayerToggle(false);
@@ -57,6 +60,9 @@ const Body = () => {
       
     }
     else {
+      let sounds = document.getElementsByTagName('audio');
+      let i = 0;
+      for(i=0; i<sounds.length; i++) sounds[i].pause();
       $("#audioContainer").slideUp("fast")
       setListenText("Listen Now")
       setMediaPLayerToggle(false);
