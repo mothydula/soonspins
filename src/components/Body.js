@@ -94,6 +94,16 @@ const Body = () => {
       <BrowserView>
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
+            
+            <Carousel.Item style={{ height: "100%" }}>
+              <Player className="carousel-height">
+                <source src="trailer_final.mp4" />
+              </Player>
+              <Carousel.Caption>
+                <h3>WELCOME TO SOONSPINS</h3>
+                <p>Click to watch</p>
+              </Carousel.Caption>
+            </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
 
               <img
@@ -104,17 +114,8 @@ const Body = () => {
               />
               <Carousel.Caption>
                 <h3>DJ KPMADMAN MIX COMING SOON</h3>
-                <p>Wednesday October 14th 7PM</p>
+                <p>Friday October 16th 7PM</p>
                 {/*<Button ref={listenRef} onClick={playAudio} variant="outline-light">{listenText}</Button>*/}
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item style={{ height: "100%" }}>
-              <Player className="carousel-height">
-                <source src="trailer_final.mp4" />
-              </Player>
-              <Carousel.Caption>
-                <h3>WELCOME TO SOONSPINS</h3>
-                <p>Click to watch</p>
               </Carousel.Caption>
             </Carousel.Item>
           </Carousel>
@@ -122,19 +123,7 @@ const Body = () => {
       </BrowserView>
       <MobileView>
         <Col style={{ alignItems: "center" }}>
-          <Row>
-            <Card className="soonspins-card">
-              <Card.Img variant="top" src="kp_large.JPG" />
-              <Card.Body>
-                <Card.Title>DJ KPMADMAN MIX COMING SOON</Card.Title>
-                <Card.Text>
-                Wednesday October 14th 7PM
-    </Card.Text>
-                {/*<Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>*/}
-              </Card.Body>
-            </Card>
-          </Row>
-          <Row>
+        <Row>
             <Card className="soonspins-card">
               <Player>
                 <source src="trailer_final.mp4" />
@@ -147,6 +136,19 @@ const Body = () => {
               </Card.Body>
             </Card>
           </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="kp_large.JPG" />
+              <Card.Body>
+                <Card.Title>DJ KPMADMAN MIX COMING SOON</Card.Title>
+                <Card.Text>
+                Friday October 16th 7PM
+    </Card.Text>
+                {/*<Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>*/}
+              </Card.Body>
+            </Card>
+          </Row>
+          
         </Col>
       </MobileView>
     </div>
