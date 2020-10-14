@@ -104,8 +104,8 @@ const Body = () => {
               />
               <Carousel.Caption>
                 <h3>DJ KPMADMAN MIX COMING SOON</h3>
-                <p>Wednesday September 30th 7PM</p>
-                <Button ref={listenRef} onClick={playAudio} variant="outline-light">{listenText}</Button>
+                <p>Wednesday October 14th 7PM</p>
+                {/*<Button ref={listenRef} onClick={playAudio} variant="outline-light">{listenText}</Button>*/}
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
@@ -128,9 +128,9 @@ const Body = () => {
               <Card.Body>
                 <Card.Title>DJ KPMADMAN MIX COMING SOON</Card.Title>
                 <Card.Text>
-                  Wednesday September 30th 7PM
+                Wednesday October 14th 7PM
     </Card.Text>
-                <Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>
+                {/*<Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>*/}
               </Card.Body>
             </Card>
           </Row>

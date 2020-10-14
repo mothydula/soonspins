@@ -41,8 +41,10 @@ const Artists = (props) => {
             </Container>
           </Row>
         <Row ref={rowRef} className="artist-row" style={{ width: "100%", padding: 15, }}>
-
-          {Object.entries(artists).map((entry, i) =>
+        <Container id="featured-artists" fluid style={{ marginBottom: 0, textAlign: "center", padding: 15, paddingTop: 30 }}>
+              <h1 className="title-h1" style={{fontSize: "1.75rem"}}>COMING SOON</h1>
+            </Container>
+          {/*Object.entries(artists).map((entry, i) =>
 
             <Col md={3} style={{ marginBottom: 15 }}>
               <Card className="soonspins-card" style={{ marginBottom: 15, width: "100%", height: "100%" }}>
@@ -57,7 +59,7 @@ const Artists = (props) => {
                 </Card.Body>
               </Card>
             </Col>
-          )}
+          )*/}
         </Row>
     </Container>
   )
