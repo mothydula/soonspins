@@ -28,9 +28,9 @@ const Body = () => {
   };
   let playlist = [
     {
-      src: "peanutbutter_society_12.mp3",
-      title: "PB SOCIETY 12",
-      artist: "Tim"
+      src: "soonspins_intro_1.wav",
+      title: "A SOONSPINS CHAT",
+      artist: "SOONSPINS"
     },
   ];
   const playAudio = () => {
@@ -109,6 +109,20 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
+                src="ss_sc.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>A SOONSPINS CHAT</h3>
+                <p>KP & Mothy Dula discuss the beginnings of and the context surrounding SOONSPINS</p>
+                <Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
                 src="kp_large.JPG"
                 alt="First slide"
               />
@@ -133,6 +147,18 @@ const Body = () => {
                 <Card.Text>
                   Press play to watch
     </Card.Text>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="ss_sc.jpg" />
+              <Card.Body>
+                <Card.Title>A SOONSPINS CHAT</Card.Title>
+                <Card.Text>
+                KP & Mothy Dula discuss the beginnings of and the context surrounding SOONSPINS
+    </Card.Text>
+                <Button ref={listenRef} onClick={playAudioMobile} variant="outline-light">{listenText}</Button>
               </Card.Body>
             </Card>
           </Row>

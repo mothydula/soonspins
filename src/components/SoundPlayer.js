@@ -7,9 +7,11 @@ import { Row, Carousel, Container, Section } from 'react-bootstrap'
 
 const SoundPlayer = () => {
     let playlist = [
-        { src: "peanutbutter_society_12.mp3",
-          title: "PB SOCIETY 12",
-          artist: "Tim" },
+        {
+          src: "soonspins_intro_1.wav",
+          title: "A SOONSPINS CHAT",
+          artist: "SOONSPINS"
+        },
       ];
 
     useEffect(() => {
