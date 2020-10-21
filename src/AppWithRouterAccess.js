@@ -10,6 +10,7 @@ import Livestream from './components/Livestream'
 import Admin from './components/Admin'
 import About from './components/About'
 import Login from './components/auth/Login'
+import SoundPlayerTwo from './components/SoundPlayerTwo'
 import "./Assets/css/default.min.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col } from "react-bootstrap"
@@ -40,7 +41,8 @@ function App() {
             <Route exact path="/">
               <Header />
               <Body />
-              <SoundPlayer />
+              
+              {/*<SoundPlayerTwo />*/}
               <Artists artists={artists} />
               <Footer />
             </Route>

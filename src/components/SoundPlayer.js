@@ -5,14 +5,9 @@ import $ from "jquery"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Carousel, Container, Section } from 'react-bootstrap'
 
-const SoundPlayer = () => {
-    let playlist = [
-        {
-          src: "soonspins_intro_1.wav",
-          title: "A SOONSPINS CHAT",
-          artist: "SOONSPINS"
-        },
-      ];
+const SoundPlayer = (props) => {
+    let playlist = props.playlist.playlist;
+      console.log(playlist)
 
     useEffect(() => {
         $("#audioContainer").hide()
