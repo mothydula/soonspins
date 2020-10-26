@@ -34,6 +34,7 @@ const About = () => {
                     {/*aboutText*/}
                     Here at SOONSPINS our goal is to present the masses with high quality sounds and and high quality visuals. Inspired by a variety of mediums, SOONSPINS is truly independent and an ode to underground culture. 
                 </p>
+                <p><a href="https://www.patreon.com/soonspace" target="_blank" style={{color: "blue!important"}}>Click here to visit our patreon.</a></p>
                 <BrowserView>
                     <img src="/soonspins_2.png" height="20%" width="25%" alt="" style={{}}/>
                 </BrowserView>

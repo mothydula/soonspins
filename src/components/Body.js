@@ -141,7 +141,20 @@ const Body = () => {
       <BrowserView>
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
+            <Carousel.Item style={{ height: "100%" }}>
 
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="soonspins-3.png"
+                alt="First slide"
+              />
+              <Carousel.Caption>
+                <h3>SOONSPINS PATREON UP NOW</h3>
+                <p>Monday October 26th 12PM</p>
+                <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button> 
+              </Carousel.Caption>
+            </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
 
               <img
@@ -152,7 +165,7 @@ const Body = () => {
               />
               <Carousel.Caption>
                 <h3>MIAMI BASS MIX OUT NOW</h3>
-                <p>Wednesday October 20th 7PM</p>
+                <p>Wednesday October 20th 12PM</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
                     src: "miami_mix.mp3",
@@ -220,11 +233,23 @@ const Body = () => {
         <Col style={{ alignItems: "center" }}>
         <Row>
             <Card className="soonspins-card">
+              <Card.Img variant="top" src="soonspins-3.png" />
+              <Card.Body>
+                <Card.Title>SOONSPINS PATREON UP NOW</Card.Title>
+                <Card.Text>
+                  Monday October 26th 12PM
+    </Card.Text>
+    <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
               <Card.Img variant="top" src="miami_pic_mobile.jpg" />
               <Card.Body>
-                <Card.Title>DJ KPMADMAN'S POOL MIX OUT NOW</Card.Title>
+                <Card.Title>MIAMI BASS MIX OUT NOW</Card.Title>
                 <Card.Text>
-                  Friday October 16th 7PM
+                  Wednesday October 20th 12PM
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
