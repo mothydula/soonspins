@@ -141,6 +141,28 @@ const Body = () => {
       <BrowserView>
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
+
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="nairobi_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption > 
+                <h3 style={{color: "black"}} >NAIROBI UGANDA MIX OUT NOW</h3>
+                <p style={{color: "black"}} >Neighboring countries, neighborly sounds...</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "nairobi_uganda_mix.mp3",
+                    title: "NAIROBI/UGANDA MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button4")} variant="outline-dark" id="button4">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+
             <Carousel.Item style={{ height: "100%" }}>
 
               <img
@@ -152,7 +174,7 @@ const Body = () => {
               <Carousel.Caption>
                 <h3>SOONSPINS PATREON UP NOW</h3>
                 <p>Monday October 26th 12PM</p>
-                <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button> 
+                <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
@@ -233,13 +255,31 @@ const Body = () => {
         <Col style={{ alignItems: "center" }}>
         <Row>
             <Card className="soonspins-card">
+              <Card.Img variant="top" src="nairobi_pic.jpg" />
+              <Card.Body>
+                <Card.Title>NAIROBI UGANDA MIX OUT NOW</Card.Title>
+                <Card.Text>
+                Neighboring countries, neighborly sounds...
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "nairobi_uganda_mix.mp3",
+                    title: "NAIROBI/UGANDA MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button4-mobile")} id="button4-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
               <Card.Img variant="top" src="soonspins-3.png" />
               <Card.Body>
                 <Card.Title>SOONSPINS PATREON UP NOW</Card.Title>
                 <Card.Text>
                   Monday October 26th 12PM
     </Card.Text>
-    <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button>
+                <Button target="_blank" href="https://www.patreon.com/soonspace" variant="outline-light" >VISIT</Button>
               </Card.Body>
             </Card>
           </Row>
