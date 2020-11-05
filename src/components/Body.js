@@ -147,12 +147,33 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
+                src="bc_mix_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>BANDCAMP DAY MIX OUT NOW</h3>
+                <p>Yea, we're late</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "bc_mix.mp3",
+                    title: "BANDCAMP DAY MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button5")} variant="outline-light" id="button5">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
                 src="nairobi_pic.jpg"
                 alt="First slide"
               />
-              <Carousel.Caption > 
-                <h3 style={{color: "black"}} >NAIROBI UGANDA MIX OUT NOW</h3>
-                <p style={{color: "black"}} >Neighboring countries, neighborly sounds...</p>
+              <Carousel.Caption >
+                <h3 style={{ color: "black" }} >NAIROBI UGANDA MIX OUT NOW</h3>
+                <p style={{ color: "black" }} >Neighboring countries, neighborly sounds...</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
                     src: "nairobi_uganda_mix.mp3",
@@ -255,11 +276,29 @@ const Body = () => {
         <Col style={{ alignItems: "center" }}>
         <Row>
             <Card className="soonspins-card">
+              <Card.Img variant="top" src="bc_mix_pic.jpg" />
+              <Card.Body>
+                <Card.Title>BANDCAMP DAY MIX OUT NOW</Card.Title>
+                <Card.Text>
+                  Yea we're late
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "bc_mix.mp3",
+                    title: "BANDCAMP DAY MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button5-mobile")} id="button5-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
               <Card.Img variant="top" src="nairobi_pic.jpg" />
               <Card.Body>
                 <Card.Title>NAIROBI UGANDA MIX OUT NOW</Card.Title>
                 <Card.Text>
-                Neighboring countries, neighborly sounds...
+                  Neighboring countries, neighborly sounds...
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
