@@ -141,7 +141,60 @@ const Body = () => {
       <BrowserView>
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
+            <Carousel.Item style={{ height: "100%" }}>
 
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="maux_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>MAUX DJ SET</h3>
+                <p>Oh shit</p>
+                <Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button> 
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="ds_pic_1.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>DANCE THE STRESS AWAY MIX</h3>
+                <p>2 step with a glass of whiskey straight</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "ds_mix.mp3",
+                    title: "DANCE THE STRESS AWAY MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button7")} variant="outline-light" id="button7">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="jj_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>JARED JACKSON MIX</h3>
+                <p>JJ.</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "jj_mix.mp3",
+                    title: "JARED JACKSON MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button6")} variant="outline-light" id="button6">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
 
               <img
@@ -230,13 +283,13 @@ const Body = () => {
               <Carousel.Caption>
                 <h3>DJ KPMADMAN's POOL MIX OUT NOW</h3>
                 <p>Friday October 16th 7PM</p>
-                <span><Button ref={listenRef} onClick={() => playAudio([
+                <Button ref={listenRef} onClick={() => playAudio([
                   {
                     src: "pool_mix.mp3",
                     title: "POOLMIX",
                     artist: "DJ KPMADMAN"
                   },
-                ], "#button2")} variant="outline-light" id="button2">{listenText}</Button> <Button href="https://soonspins.com/livestream" variant="outline-light">WATCH</Button></span>
+                ], "#button2")} variant="outline-light" id="button2">{listenText}</Button> 
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
@@ -275,6 +328,54 @@ const Body = () => {
       <MobileView>
         <Col style={{ alignItems: "center" }}>
         <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="maux_pic.jpg" />
+              <Card.Body>
+                <Card.Title>DJ MAUX SET</Card.Title>
+                <Card.Text>
+                  Oh shit.
+    </Card.Text>
+                <Button variant="outline-light" href="https://soonspins.com/livestream">WATCH NOW</Button> 
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="ds_pic_1.jpg" />
+              <Card.Body>
+                <Card.Title>DANCE THE STRESS AWAY MIX</Card.Title>
+                <Card.Text>
+                  2 step with a glass of whiskey straight
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "ds_mix.mp3",
+                    title: "DANCE THE STRESS AWAY MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button7-mobile")} id="button7-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="jj_pic.jpg" />
+              <Card.Body>
+                <Card.Title>JARED JACKSON MIX</Card.Title>
+                <Card.Text>
+                  JJ.
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "jj_mix.mp3",
+                    title: "JARED JACKSON MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button6-mobile")} id="button6-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
             <Card className="soonspins-card">
               <Card.Img variant="top" src="bc_mix_pic.jpg" />
               <Card.Body>
@@ -348,13 +449,13 @@ const Body = () => {
                 <Card.Text>
                   Friday October 16th 7PM
     </Card.Text>
-                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                <Button ref={listenRef} onClick={() => playAudioMobile([
                   {
                     src: "pool_mix.mp3",
                     title: "POOLMIX",
                     artist: "DJ KPMADMAN"
                   },
-                ], "#button2-mobile")} id="button2-mobile" variant="outline-light">{listenText2}</Button> <Button href="https://soonspins.com/livestream" variant="outline-light">WATCH</Button></span>
+                ], "#button2-mobile")} id="button2-mobile" variant="outline-light">{listenText2}</Button> 
               </Card.Body>
             </Card>
           </Row>
