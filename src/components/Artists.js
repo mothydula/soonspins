@@ -34,7 +34,7 @@ const Artists = (props) => {
   }, [rowHeight])
 
   return (
-    <Container fluid>
+    <Container fluid style={{textShadow: "7px 7px #1F1E1E"}}>
       <Row>
             <Container id="featured-artists" fluid style={{ marginBottom: 0, textAlign: "center", padding: 15, paddingTop: 30 }}>
               <h1 className="title-h1" style={{fontSize: "2rem"}}>SOONSPINS SPACE</h1>

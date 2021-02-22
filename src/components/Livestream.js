@@ -47,7 +47,7 @@ const Livestream = () => {
 
             <Jumbotron className="mb-5" fluid style={{ backgroundColor: "transparent", marginBottom: 0 }}>
                 <Container>
-                    <h1 className="title-h1" style={{ wordWrap: "break-word", transform: "uppercase" }}>WATCH {artistName.toUpperCase()}'S PERFOMANCE BELOW</h1>
+                    <h1 className="title-h1" style={{ wordWrap: "break-word", transform: "uppercase" }}>WATCH MAUX'S PERFOMANCE BELOW</h1>
                 </Container>
             </Jumbotron>
 

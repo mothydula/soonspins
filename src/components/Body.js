@@ -15,6 +15,9 @@ import $ from "jquery";
 const Body = () => {
   const [index, setIndex] = useState(0);
   const [timerToggle, setTimerToggle] = useState(true)
+  const [contentPayload, setContentPayload] = useState([])
+  const [mixCloudPayload, setMixCloudPayload] = useState([])
+  let iFrames = []
   const listenRef = useRef();
   const [listenText, setListenText] = useState("Listen Now")
   const [listenText2, setListenText2] = useState("Listen Now")
@@ -48,6 +51,8 @@ const Body = () => {
     //let i = 0;
     //for (i = 0; i < sounds.length; i++) sounds[i].play();
     if ($("#audioContainer").is(":hidden") && $(buttonRef).html() === "Listen Now") {
+      $("#outer-playlist").html("");
+      $("#outer-playlist").hide();
       $("#audioContainer").slideDown("fast")
       console.log("HAAAAAAAAAAAAA" + $(buttonRef).html())
       setAudioButtonList((oldList) => { return [...oldList, buttonRef] })
@@ -77,11 +82,34 @@ const Body = () => {
     setPlaylist(playlistToChange);
   }
 
+  const playMixCloudAudio = (embedCode, mobile) => {
+    
+    console.log("YOUNG")
+    let sounds = document.getElementsByTagName('audio');
+    console.log(sounds)
+    let i = 0;
+    for (i = 0; i < sounds.length; i++) sounds[i].pause();
+    $("#audioContainer").hide()
+    $("#outer-playlist").html(embedCode) 
+    $("#outer-playlist").slideDown("fast")
+    $("#outer-playlist").children().attr('id','mixcloud-embed')
+    console.log($("#outer-playlist").children()[0])
+    if(mobile){
+      let player = document.getElementById("outer-playlist");
+      player.scrollIntoView();
+    }
+  }
+
+  useEffect(() => {
+
+  }, [])
+
   const playAudioMobile = (playlistToChange, buttonRef) => {
     let sounds = document.getElementsByTagName('audio');
     let i = 0;
     for (i = 0; i < sounds.length; i++) sounds[i].pause();
     if ($("#audioContainer").is(":hidden")) {
+      $("#outer-playlist").hide();
       $("#audioContainer").slideDown("fast")
       console.log("HAAAAAAAAAAAAA" + $(buttonRef).html())
       setAudioButtonList((oldList) => { return [...oldList, buttonRef] })
@@ -129,30 +157,98 @@ const Body = () => {
   const [currentTime, setCurrentTime] = useState(0)
 
   useEffect(() => {
-    fetch('https://soonspins.herokuapp.com/time').then(res => res.json()).then(data => {
-      setCurrentTime(data.time)
-    })
-  }, [])
-  useEffect(() => {
     console.log("rerender: " + $("#audioContainer").is(":visible"))
   }, [playlist])
+
+  useEffect(() => {
+    $("#outer-playlist").hide();
+  }, [])
+
+  useEffect(() => {
+    fetch("https://soonspins-site.uc.r.appspot.com/getPostData").then(response => response.json()).then(data => {
+      setContentPayload(data)
+      console.log(data)
+    }).catch(
+      error => {
+        console.log(error)
+      }
+    )
+  }, [])
+
+  useEffect(() => {
+    fetch("https://soonspins-site.uc.r.appspot.com/getMixCloudData").then(response => response.json()).then(data => {
+      setMixCloudPayload(data)
+      console.log(data)
+      
+      console.log("YOUNG!")
+    }).catch(
+      error => {
+        console.log(error)
+      }
+    )
+  }, [])
+
   return (
     <div>
       <BrowserView>
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
-            <Carousel.Item style={{ height: "100%" }}>
+            {mixCloudPayload.map((contentObject, index) => (
+              <Carousel.Item style={{ height: "100%" }} id={index}>
+
+                <img
+
+                  className="d-block w-100 carousel-height"
+                  src={contentObject['image_url']}
+                  alt="First slide"
+                />
+                <Carousel.Caption >
+                  <h3>{contentObject['title']}</h3>
+                  <p>{contentObject['description']}</p>
+                  <Button ref={listenRef} onClick={() => playMixCloudAudio(contentObject['embed_code'], false)} variant="outline-light" id="button">{listenText}</Button>
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+            {contentPayload.map((contentObject, index) => (
+              <Carousel.Item style={{ height: "100%" }}>
+
+                <img
+
+                  className="d-block w-100 carousel-height"
+                  src={contentObject['image_url']}
+                  alt="First slide"
+                />
+                <Carousel.Caption >
+                  <h3>{contentObject['content_title']}</h3>
+                  <p>{contentObject['content_description']}</p>
+                  {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudio([
+                    {
+                      src: contentObject['content_url'],
+                      title: contentObject['content_title'],
+                      artist: contentObject['content_title']
+                    },
+                  ], "#button")} variant="outline-light" id="button">{listenText}</Button>) : (<Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
+                </Carousel.Caption>
+              </Carousel.Item>
+            ))}
+            {/*<Carousel.Item style={{ height: "100%" }}>
 
               <img
 
                 className="d-block w-100 carousel-height"
-                src="maux_pic.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/q_mix_pic.jpg"
                 alt="First slide"
               />
               <Carousel.Caption >
-                <h3>MAUX DJ SET</h3>
-                <p>Oh shit</p>
-                <Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button> 
+                <h3>DJQ MIX</h3>
+                <p>This is tasty</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "https://storage.googleapis.com/song-files/q_mix.mp3",
+                    title: "DJQ MIX",
+                    artist: "DJQ"
+                  },
+                ], "#button8")} variant="outline-light" id="button8">{listenText}</Button> </span>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
@@ -160,7 +256,81 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="ds_pic_1.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/pootiecat_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>DJ POOTIECAT MIX</h3>
+                <p>Enjoy your Wednesday :)</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "https://storage.googleapis.com/song-files/pootiecat_mix.mp3",
+                    title: "DJ POOTIECAT MIX",
+                    artist: "DJ POOTIECAT"
+                  },
+                ], "#button8")} variant="outline-light" id="button8">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="https://storage.googleapis.com/soonspins_site_images/psylasso_cover.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>PSYLASSO EXPERIENCE MIX</h3>
+                <p>What we do...</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "https://storage.googleapis.com/song-files/psylasso_mix.mp3",
+                    title: "PSYLASSO EXPERIENCE MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button8")} variant="outline-light" id="button8">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="https://storage.googleapis.com/soonspins_site_images/IMG-0007.JPG"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>132 MIX</h3>
+                <p>Eremsy's SOONSPINS debut</p>
+                <span><Button ref={listenRef} onClick={() => playAudio([
+                  {
+                    src: "https://storage.googleapis.com/song-files/132_mix.mp3",
+                    title: "132 MIX",
+                    artist: "EREMSY"
+                  },
+                ], "#button8")} variant="outline-light" id="button8">{listenText}</Button> </span>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="https://storage.googleapis.com/soonspins_site_images/maux_pic.jpg"
+                alt="First slide"
+              />
+              <Carousel.Caption >
+                <h3>MAUX DJ SET</h3>
+                <p>Oh shit</p>
+                <Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>
+              </Carousel.Caption>
+            </Carousel.Item>
+            <Carousel.Item style={{ height: "100%" }}>
+
+              <img
+
+                className="d-block w-100 carousel-height"
+                src="https://storage.googleapis.com/soonspins_site_images/ds_pic_1.jpg"
                 alt="First slide"
               />
               <Carousel.Caption >
@@ -168,7 +338,7 @@ const Body = () => {
                 <p>2 step with a glass of whiskey straight</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "ds_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/ds_mix.mp3",
                     title: "DANCE THE STRESS AWAY MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -180,7 +350,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="jj_pic.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/jj_pic.jpg"
                 alt="First slide"
               />
               <Carousel.Caption >
@@ -188,7 +358,7 @@ const Body = () => {
                 <p>JJ.</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "jj_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/jj_mix.mp3",
                     title: "JARED JACKSON MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -200,7 +370,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="bc_mix_pic.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/bc_mix_pic.jpg"
                 alt="First slide"
               />
               <Carousel.Caption >
@@ -208,7 +378,7 @@ const Body = () => {
                 <p>Yea, we're late</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "bc_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/bc_mix.mp3",
                     title: "BANDCAMP DAY MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -221,7 +391,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="nairobi_pic.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/nairobi_pic.jpg"
                 alt="First slide"
               />
               <Carousel.Caption >
@@ -229,7 +399,7 @@ const Body = () => {
                 <p style={{ color: "black" }} >Neighboring countries, neighborly sounds...</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "nairobi_uganda_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/nairobi_uganda_mix.mp3",
                     title: "NAIROBI/UGANDA MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -242,7 +412,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="soonspins-3.png"
+                src="https://storage.googleapis.com/soonspins_site_images/soonspins-3.png"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -256,7 +426,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="miami_pic_desktop.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/miami_pic_desktop.jpg"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -264,7 +434,7 @@ const Body = () => {
                 <p>Wednesday October 20th 12PM</p>
                 <span><Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "miami_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/miami_mix.mp3",
                     title: "MIAMI BASS",
                     artist: "DJ KPMADMAN"
                   },
@@ -277,7 +447,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="kp_large.JPG"
+                src="https://storage.googleapis.com/soonspins_site_images/kp_large.JPG"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -285,11 +455,11 @@ const Body = () => {
                 <p>Friday October 16th 7PM</p>
                 <Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "pool_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/pool_mix.mp3",
                     title: "POOLMIX",
                     artist: "DJ KPMADMAN"
                   },
-                ], "#button2")} variant="outline-light" id="button2">{listenText}</Button> 
+                ], "#button2")} variant="outline-light" id="button2">{listenText}</Button>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
@@ -297,7 +467,7 @@ const Body = () => {
               <img
 
                 className="d-block w-100 carousel-height"
-                src="ss_sc.jpg"
+                src="https://storage.googleapis.com/soonspins_site_images/ss_sc.jpg"
                 alt="First slide"
               />
               <Carousel.Caption>
@@ -305,7 +475,7 @@ const Body = () => {
                 <p>KP & Mothy Dula discuss the beginnings of and the context surrounding SOONSPINS</p>
                 <Button ref={listenRef} onClick={() => playAudio([
                   {
-                    src: "ssonspins_chat_1.mp3",
+                    src: "https://storage.googleapis.com/song-files/ssonpins_chat_1.mp3",
                     title: "A SOONSPINS CHAT",
                     artist: "SOONSPINS"
                   },
@@ -314,34 +484,140 @@ const Body = () => {
             </Carousel.Item>
             <Carousel.Item style={{ height: "100%" }}>
               <Player className="carousel-height">
-                <source src="trailer_final.mp4" />
+                <source src="https://storage.googleapis.com/soonspins-site-videos/trailer_final.mp4" />
               </Player>
               <Carousel.Caption>
                 <h3>WELCOME TO SOONSPINS</h3>
                 <p>Click to watch</p>
               </Carousel.Caption>
-            </Carousel.Item>
+            </Carousel.Item>*/}
 
           </Carousel>
         </Container>
       </BrowserView>
       <MobileView>
         <Col style={{ alignItems: "center" }}>
-        <Row>
+        { mixCloudPayload.map((contentObject, index) => (
+            <Row>
+              <Card className="soonspins-card">
+
+                <Card.Img variant="top"
+                  src={contentObject['image_url']} />
+                <Card.Body>
+                  <Card.Title>{contentObject['title']}</Card.Title>
+                  <Card.Text>{contentObject['description']}</Card.Text>
+                  {<Button ref={listenRef} onClick={() => playMixCloudAudio(contentObject['embed_code'], true)} variant="outline-light" id="button">{listenText2}</Button>}
+                </Card.Body>
+              </Card>
+            </Row>
+          ))}
+          {contentPayload.map((contentObject, index) => (
+            <Row>
+              <Card className="soonspins-card">
+
+                <Card.Img variant="top"
+                  src={contentObject['image_url']} />
+                <Card.Body>
+                  <Card.Title>{contentObject['content_title']}</Card.Title>
+                  <Card.Text>{contentObject['content_description']}</Card.Text>
+                  {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudioMobile([
+                    {
+                      src: contentObject['content_url'],
+                      title: contentObject['content_title'],
+                      artist: contentObject['content_title']
+                    },
+                  ], "#button")} variant="outline-light" id="button">{listenText2}</Button>) : (<Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
+                </Card.Body>
+              </Card>
+            </Row>
+          ))}
+          {/*<Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="maux_pic.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/q_mix_pic.jpg" />
               <Card.Body>
-                <Card.Title>DJ MAUX SET</Card.Title>
+                <Card.Title>DJQ MIX</Card.Title>
                 <Card.Text>
-                  Oh shit.
+                  This is tasty
     </Card.Text>
-                <Button variant="outline-light" href="https://soonspins.com/livestream">WATCH NOW</Button> 
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "https://storage.googleapis.com/song-files/q_mix.mp3",
+                    title: "DJQ MIX",
+                    artist: "DJQ"
+                  },
+                ], "#button8-mobile")} id="button8-mobile" variant="outline-light">{listenText2}</Button> </span>
               </Card.Body>
             </Card>
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="ds_pic_1.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/pootiecat_pic.jpg" />
+              <Card.Body>
+                <Card.Title>DJ POOTIECAT MIX</Card.Title>
+                <Card.Text>
+                  Enjoy your Wednesday :)
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "https://storage.googleapis.com/song-files/pootiecat_mix.mp3",
+                    title: "DJ POOTIECAT MIX",
+                    artist: "DJ POOTIECAT"
+                  },
+                ], "#button8-mobile")} id="button8-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/psylasso_cover.jpg" />
+              <Card.Body>
+                <Card.Title>PSYLASSO EXPERIENCE MIX</Card.Title>
+                <Card.Text>
+                  What we do...
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "https://storage.googleapis.com/song-files/psylasso_mix.mp3",
+                    title: "PSYLASSO EXPERIENCE MIX",
+                    artist: "DJ KPMADMAN"
+                  },
+                ], "#button8-mobile")} id="button8-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/IMG-0007.JPG" />
+              <Card.Body>
+                <Card.Title>132 MIX</Card.Title>
+                <Card.Text>
+                  Eremsy's SOONSPINS debut
+    </Card.Text>
+                <span><Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: "https://storage.googleapis.com/song-files/132_mix.mp3",
+                    title: "132 MIX",
+                    artist: "EREMSY"
+                  },
+                ], "#button8-mobile")} id="button8-mobile" variant="outline-light">{listenText2}</Button> </span>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/maux_pic.jpg" />
+              <Card.Body>
+                <Card.Title>DJ MAUX SET</Card.Title>
+                <Card.Text>
+                  Oh shit.
+    </Card.Text>
+                <Button variant="outline-light" href="https://soonspins.com/livestream">WATCH NOW</Button>
+              </Card.Body>
+            </Card>
+          </Row>
+          <Row>
+            <Card className="soonspins-card">
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/ds_pic_1.jpg" />
               <Card.Body>
                 <Card.Title>DANCE THE STRESS AWAY MIX</Card.Title>
                 <Card.Text>
@@ -359,7 +635,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="jj_pic.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/jj_pic.jpg" />
               <Card.Body>
                 <Card.Title>JARED JACKSON MIX</Card.Title>
                 <Card.Text>
@@ -367,7 +643,7 @@ const Body = () => {
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "jj_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/jj_mix.mp3",
                     title: "JARED JACKSON MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -377,7 +653,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="bc_mix_pic.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/bc_mix_pic.jpg" />
               <Card.Body>
                 <Card.Title>BANDCAMP DAY MIX OUT NOW</Card.Title>
                 <Card.Text>
@@ -385,7 +661,7 @@ const Body = () => {
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "bc_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/bc_mix.mp3",
                     title: "BANDCAMP DAY MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -395,7 +671,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="nairobi_pic.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/nairobi_pic.jpg" />
               <Card.Body>
                 <Card.Title>NAIROBI UGANDA MIX OUT NOW</Card.Title>
                 <Card.Text>
@@ -403,7 +679,7 @@ const Body = () => {
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "nairobi_uganda_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/nairobi_uganda_mix.mp3",
                     title: "NAIROBI/UGANDA MIX",
                     artist: "DJ KPMADMAN"
                   },
@@ -413,7 +689,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="soonspins-3.png" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/soonspins-3.png" />
               <Card.Body>
                 <Card.Title>SOONSPINS PATREON UP NOW</Card.Title>
                 <Card.Text>
@@ -425,7 +701,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="miami_pic_mobile.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/miami_pic_mobile.jpg" />
               <Card.Body>
                 <Card.Title>MIAMI BASS MIX OUT NOW</Card.Title>
                 <Card.Text>
@@ -433,7 +709,7 @@ const Body = () => {
     </Card.Text>
                 <span><Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "miami_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/miami_mix.mp3",
                     title: "MIAMI BASS",
                     artist: "DJ KPMADMAN"
                   },
@@ -443,7 +719,7 @@ const Body = () => {
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="kp_large.JPG" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/kp_large.JPG" />
               <Card.Body>
                 <Card.Title>DJ KPMADMAN'S POOL MIX OUT NOW</Card.Title>
                 <Card.Text>
@@ -451,17 +727,17 @@ const Body = () => {
     </Card.Text>
                 <Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "pool_mix.mp3",
+                    src: "https://storage.googleapis.com/song-files/pool_mix.mp3",
                     title: "POOLMIX",
                     artist: "DJ KPMADMAN"
                   },
-                ], "#button2-mobile")} id="button2-mobile" variant="outline-light">{listenText2}</Button> 
+                ], "#button2-mobile")} id="button2-mobile" variant="outline-light">{listenText2}</Button>
               </Card.Body>
             </Card>
           </Row>
           <Row>
             <Card className="soonspins-card">
-              <Card.Img variant="top" src="ss_sc.jpg" />
+              <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/ss_sc.jpg" />
               <Card.Body>
                 <Card.Title>A SOONSPINS CHAT</Card.Title>
                 <Card.Text>
@@ -469,7 +745,7 @@ const Body = () => {
     </Card.Text>
                 <Button ref={listenRef} onClick={() => playAudioMobile([
                   {
-                    src: "ssonspins_chat_1.mp3",
+                    src: "https://storage.googleapis.com/song-files/ssonpins_chat_1.mp3",
                     title: "A SOONSPINS CHAT",
                     artist: "SOONSPINS"
                   },
@@ -480,7 +756,7 @@ const Body = () => {
           <Row>
             <Card className="soonspins-card">
               <Player>
-                <source src="trailer_final.mp4" />
+                <source src="https://storage.googleapis.com/soonspins-site-videos/trailer_final.mp4" />
               </Player>
               <Card.Body>
                 <Card.Title>WELCOME TO SOONSPINS</Card.Title>
@@ -489,10 +765,11 @@ const Body = () => {
     </Card.Text>
               </Card.Body>
             </Card>
-          </Row>
+          </Row>*/}
         </Col>
       </MobileView>
       <SoundPlayer playlist={{ playlist: playlist }} />
+      <div id="outer-playlist"></div>
     </div>
   );
 }

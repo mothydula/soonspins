@@ -1,5 +1,5 @@
 from datetime import datetime as dt
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from flask_cors import CORS, cross_origin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import desc
@@ -17,7 +17,7 @@ dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'soonspins-site-98aa805e42a7.json')
 storage_client = storage.Client.from_service_account_json(filename)
 bucket = storage_client.get_bucket("soonspins_site_images")
-
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/")
 @cross_origin()
@@ -92,6 +92,56 @@ def set_about_section():
         return "success"
     except:
         return "failed"
+
+@app.route("/upload", methods=["POST", "GET"])
+@cross_origin()
+def upload():
+    #folder_name = request.form['templates']
+    #print(folder_name)
+    
+    print(request.form['eventTitle'])
+    print(request.form['descriptionText'])
+    print(request.form['mixcloudCode'])
+
+    return {'nothing': 'nothing'}
+    '''
+    # this is to verify that folder to upload to exists.
+    if os.path.isdir(os.path.join(APP_ROOT, 'files/{}'.format(folder_name))):
+        print("folder exist")
+    '''
+    """"
+    target = os.path.join(APP_ROOT, 'templates/')
+    print(target)
+    if not os.path.isdir(target):
+        os.mkdir(target)
+    print(request.files.getlist("file"))
+    for upload in request.files.getlist("file"):
+        print(upload)
+        print("{} is the file name".format(upload.filename))
+        filename = upload.filename
+        # This is to verify files are supported
+        ext = os.path.splitext(filename)[1]
+        if (ext == ".jpg") or (ext == ".png"):
+            print("File supported moving on...")
+        else:
+            render_template("Error.html", message="Files uploaded are not supported...")
+        destination = "/".join([target, filename])
+        print("Accept incoming file:", filename)
+        print("Save it to:", destination)
+        upload.save(destination)
+
+    # return send_from_directory("images", filename, as_attachment=True)
+    return render_template("complete.html", image_name=filename)
+    """
+    return str(request.files)
+
+@app.route('/gallery')
+def get_gallery():
+    image_names = os.listdir('./images')
+    print(image_names)
+    return render_template("gallery.html", image_names=image_names)
+
+
 """
 @app.route('/addFeaturedArtist/<artist_data>', methods=['GET', 'POST'])
 def add_featured_artist(artist_data):

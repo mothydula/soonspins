@@ -16,7 +16,7 @@ const LoginForm = ({ issuer }) => {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     useEffect(() => {
-        $("body").css("background-color", "#F5AD0C")
+        //$("body").css("background-color", "#F5AD0C")
     }, [])
 
     const handleSubmit = (e) => {
@@ -47,14 +47,14 @@ const LoginForm = ({ issuer }) => {
 
 
     return (
-        <div id="admin-login" style={{backgroundColor: "#F5AD0C"}}>
+        <div id="admin-login" style={{backgroundColor: "transparent", width: "100%"}}>
             <Header />
-            <Jumbotron fluid style={{ backgroundColor: "#F5AD0C", marginBottom: 0 }}>
+            <Jumbotron fluid style={{ backgroundColor: "transparent", marginBottom: 0 }}>
                 <Container>
                     <h1 className="title-h1">ADMIN PANEL LOGIN</h1>
                 </Container>
             </Jumbotron>
-            <Container style={{backgroundColor: "#F5AD0C"}}>
+            <Container fluid style={{backgroundColor: "transparent"}}>
                 <form onSubmit={handleSubmit}>
                     <Row>
                         <Col>
@@ -66,7 +66,8 @@ const LoginForm = ({ issuer }) => {
                             <input
                                 id="username" type="text"
                                 value={username}
-                                onChange={handleUsernameChange} />
+                                onChange={handleUsernameChange}
+                                style={{width: "100%"}} />
                         </Col>
                     </Row>
                     <Row>
@@ -79,7 +80,8 @@ const LoginForm = ({ issuer }) => {
                             <input
                                 id="password" type="password"
                                 value={password}
-                                onChange={handlePasswordChange} />
+                                onChange={handlePasswordChange} 
+                                style={{width: "100%"}} />
                         </Col>
 
                     </Row>

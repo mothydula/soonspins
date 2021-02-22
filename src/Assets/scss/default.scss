@@ -1,11 +1,15 @@
+@font-face {
+  font-family: 'Exodus';
+  src: url('../Exodus.woff') format('woff');
+}
 body {
     /*width: 100%;*/
     /*background-color: #4C4241;*/
     /*background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff.png?authuser=2");*/
     /*background-size: cover;
     background-color: #F9B012;*/
-    background-color: #f9b012;
-    background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
+    background-color: #D1A849;
+    // background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
 }
@@ -46,8 +50,9 @@ img {
     text-decoration: none;
 }
 .navbar {
-    background-color: #F74209;
+    background-color: #EBA31D;
     background-size: cover;
+    text-shadow: 5px 5px #1F1E1E;
 }
 .navbar-brand {
     color: white!important;
@@ -116,7 +121,7 @@ img {
   .line{
     width: 100%;
 
-    border-bottom: 5px solid #F5AD0C!important;
+    border-bottom: 5px solid #332D24!important;
 
     }
 
@@ -147,7 +152,6 @@ img {
 }
 
 #adminPage, #admin-login {
-    background-color: black;
     color: #BD3712;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 400;
@@ -163,6 +167,14 @@ form {
 #twitch-video {
     border-width: 10px;
     border-color: black;
+}
+
+.form-inline, .form-control {
+  width:auto;
+  font-size: 0.5rem;
+}
+.form-inline, .form-group {
+  display: inline-block;
 }
 
 .soonspins-card {
