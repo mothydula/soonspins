@@ -8,7 +8,7 @@ import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 const Header = () => {
   return (
     <div>
-    <Navbar collapseOnSelect expand="lg">
+    <Navbar collapseOnSelect expand="md" style={{width: "100%"}}>
     <Link to="/"><Navbar.Brand><img src="soonspins.png" style={{ height: 100, width: 200, }} /></Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav"><FontAwesomeIcon icon={faEllipsisH } color="white" /></Navbar.Toggle>
       <Navbar.Collapse id="responsive-navbar-nav">
