@@ -8,7 +8,7 @@ body {
     /*background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff.png?authuser=2");*/
     /*background-size: cover;
     background-color: #F9B012;*/
-    background-color: #D1A849;
+    background-color: #A9A9A9;
     // background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
@@ -57,7 +57,7 @@ img {
 .navbar-brand {
     color: white!important;
     text-decoration: none;
-    
+
     img {
         /*border-style: solid;
         border-width: 5px;
@@ -133,11 +133,11 @@ img {
     }
 
 .footer {
-    background-color: #F74209;
+    background-color: #A9A9A9;
     color: white!important;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
-    font-style: normal; 
+    font-style: normal;
 }
 .nav-link, a{
     text-decoration: none!important;
@@ -327,4 +327,3 @@ input[type=range].my-slider {
         font-size: 15px;
       }
   }
-  
