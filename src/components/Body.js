@@ -194,11 +194,11 @@ const Body = () => {
   return (
     <div>
       <BrowserView>
-        <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%", height: "50%", overflow:"auto" }}>
+        <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100vw", overflow:"auto" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
             {mixCloudPayload.map((contentObject, index) => (
 
-              <Carousel.Item style={{ width: "100%"}} id={index}>
+              <Carousel.Item style={{ size: "cover"}} id={index}>
 
                 <img
                   className="d-block w-100 carousel-height"
@@ -519,7 +519,9 @@ const Body = () => {
           ))}
 
           {contentPayload.map((contentObject, index) => (
-            <a href="https://soonspins.com/livestream">
+
+            // <a href="https://soonspins.com/livestream">
+
             <Row>
 
             <Card className="soonspins-card">
@@ -539,7 +541,7 @@ const Body = () => {
               </Card.Body>
             </Card>
           </Row>
-</a>
+// </a>
         ))}
           {/*<Row>
             <Card className="soonspins-card">
