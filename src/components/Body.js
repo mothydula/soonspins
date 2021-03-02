@@ -83,20 +83,22 @@ const Body = () => {
   }
 
   const playMixCloudAudio = (embedCode, mobile) => {
-    
+
     console.log("YOUNG")
     let sounds = document.getElementsByTagName('audio');
     console.log(sounds)
     let i = 0;
     for (i = 0; i < sounds.length; i++) sounds[i].pause();
     $("#audioContainer").hide()
-    $("#outer-playlist").html(embedCode) 
+    $("#outer-playlist").html(embedCode)
     $("#outer-playlist").slideDown("fast")
     $("#outer-playlist").children().attr('id','mixcloud-embed')
     console.log($("#outer-playlist").children()[0])
+    let player = document.getElementById("audioContainer");
+
     if(mobile){
       let player = document.getElementById("outer-playlist");
-      player.scrollIntoView();
+      // player.scrollIntoView();
     }
   }
 
@@ -117,7 +119,7 @@ const Body = () => {
       setMediaPLayerToggle2(false);
       console.log("You fail winger")
       let player = document.getElementById("audioContainer");
-      player.scrollIntoView();
+      // player.scrollIntoView();
 
     }
     else {
@@ -127,7 +129,7 @@ const Body = () => {
       setMediaPLayerToggle2(false);
       console.log("You fail winger")
       let player = document.getElementById("audioContainer");
-      player.scrollIntoView()
+      // player.scrollIntoView()
     }
     console.log(buttonRef.innerHTML)
     setPlaylist(playlistToChange);
@@ -145,7 +147,7 @@ const Body = () => {
       setMediaPLayerToggle(false);
       console.log("You fail winger")
       let player = document.getElementById("audioContainer2");
-      player.scrollIntoView();
+      // player.scrollIntoView();
 
     }
     else {
@@ -179,7 +181,7 @@ const Body = () => {
     fetch("https://soonspins-site.uc.r.appspot.com/getMixCloudData").then(response => response.json()).then(data => {
       setMixCloudPayload(data)
       console.log(data)
-      
+
       console.log("YOUNG!")
     }).catch(
       error => {
@@ -191,18 +193,18 @@ const Body = () => {
   return (
     <div>
       <BrowserView>
-        <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%" }}>
+        <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%", height: "50%", overflow:"auto" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
             {mixCloudPayload.map((contentObject, index) => (
-              <Carousel.Item style={{ height: "100%" }} id={index}>
+              <Carousel.Item style={{ width: "100%"}} id={index}>
 
                 <img
-
                   className="d-block w-100 carousel-height"
                   src={contentObject['image_url']}
+                  onClick={() => playMixCloudAudio(contentObject['embed_code'], false)}
                   alt="First slide"
                 />
-                <Carousel.Caption >
+                <Carousel.Caption>
                   <h3>{contentObject['title']}</h3>
                   <p>{contentObject['description']}</p>
                   <Button ref={listenRef} onClick={() => playMixCloudAudio(contentObject['embed_code'], false)} variant="outline-light" id="button">{listenText}</Button>
@@ -210,15 +212,16 @@ const Body = () => {
               </Carousel.Item>
             ))}
             {contentPayload.map((contentObject, index) => (
-              <Carousel.Item style={{ height: "100%" }}>
+              <Carousel.Item style={{ width: "100%"}}>
 
                 <img
 
                   className="d-block w-100 carousel-height"
                   src={contentObject['image_url']}
+                  onClick={() => playMixCloudAudio(contentObject['embed_code'], false)}
                   alt="First slide"
                 />
-                <Carousel.Caption >
+                <Carousel.Caption>
                   <h3>{contentObject['content_title']}</h3>
                   <p>{contentObject['content_description']}</p>
                   {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudio([
@@ -499,10 +502,11 @@ const Body = () => {
         <Col style={{ alignItems: "center" }}>
         { mixCloudPayload.map((contentObject, index) => (
             <Row>
-              <Card className="soonspins-card">
+              <Card className="soonspins-card" onClick={() => playMixCloudAudio(contentObject['embed_code'], false)}>
 
                 <Card.Img variant="top"
-                  src={contentObject['image_url']} />
+                  src={contentObject['image_url']}
+                  onClick={() => playMixCloudAudio(contentObject['embed_code'], false)}/>
                 <Card.Body>
                   <Card.Title>{contentObject['title']}</Card.Title>
                   <Card.Text>{contentObject['description']}</Card.Text>
@@ -513,10 +517,17 @@ const Body = () => {
           ))}
           {contentPayload.map((contentObject, index) => (
             <Row>
-              <Card className="soonspins-card">
+            {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudioMobile([
+              {
+                src: contentObject['content_url'],
+                title: contentObject['content_title'],
+                artist: contentObject['content_title']
+              },
+            ], "#button")} variant="outline-none" id="button">{}
+              <Card className="soonspins-card" >
 
-                <Card.Img variant="top"
-                  src={contentObject['image_url']} />
+
+                <Card.Img variant="top" src={contentObject['image_url']} />
                 <Card.Body>
                   <Card.Title>{contentObject['content_title']}</Card.Title>
                   <Card.Text>{contentObject['content_description']}</Card.Text>
@@ -529,6 +540,8 @@ const Body = () => {
                   ], "#button")} variant="outline-light" id="button">{listenText2}</Button>) : (<Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
                 </Card.Body>
               </Card>
+
+              </Button>) : (<Button variant="outline-none" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
             </Row>
           ))}
           {/*<Row>

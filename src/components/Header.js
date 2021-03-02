@@ -11,7 +11,7 @@ const Header = () => {
     <Navbar collapseOnSelect expand="md" style={{width: "100%"}}>
     <Link to="/"><Navbar.Brand><img src="soonspins.png" style={{ height: 100, width: 200, }} /></Navbar.Brand></Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav"><FontAwesomeIcon icon={faEllipsisH } color="white" /></Navbar.Toggle>
-      <Navbar.Collapse id="responsive-navbar-nav">
+      <Navbar.Collapse id="responsive-navbar-nav" style = {{height: "1vh"}}>
         <Nav className="mr-auto">
           <Nav.Link><Link to="/about">ABOUT</Link></Nav.Link>
           <Nav.Link ><Link to="/coming-soon">ARCHIVES</Link></Nav.Link>

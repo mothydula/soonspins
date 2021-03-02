@@ -5,7 +5,7 @@ const testPage = () => {
     return (
         <div>
             <Header />
-            <Jumbotron fluid style={{ backgroundColor: "transparent", marginBottom: 0 }}>
+            <Jumbotron fluid style={{ backgroundColor: "transparent", marginBottom: 1000 }}>
                 <Container>
                     <h1 className="title-h1" style={{ wordWrap: "break-word", transform: "uppercase" }}>COMING SOON</h1>
                 </Container>

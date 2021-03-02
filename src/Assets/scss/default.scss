@@ -8,16 +8,18 @@ body {
     /*background-image: url("https://storage.cloud.google.com/soonspins_site_images/soonspins_cloud_diff.png?authuser=2");*/
     /*background-size: cover;
     background-color: #F9B012;*/
-    background-color: #A9A9A9;
+    background-color: #161616;
+    padding-bottom: 4rem;
     // background-image: url("https://www.transparenttextures.com/patterns/cartographer.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 
 }
+
 #main-carousel{
-    width: 100%;
-    height: 100vh;
+    width: 56.25%;
     position: relative;
     padding: 0;
+
    .carousel-caption {
     color: white!important;
     font-family: titling-gothic-fb-wide, sans-serif;
@@ -27,30 +29,40 @@ body {
        text-transform: uppercase;
    }
 }
+
+#main-carousel img{
+  width: auto;
+  height: 100vh;
+}
 .d-block .w-100 {
     height: 100%;
 }
 img {
-    /*height: -webkit-fill-available;*/
+    // /*height: -webkit-fill-available;*/
 }
 
 .carousel-inner {
-    height: 100vh;
-    img{
-        position: absolute;
-    }
+  height: 100vh;
+
 }
+
+// .carousel-inner img{
+//       position: absolute;
+//       width: 100%;
+//       height: 100%;
+// }
 
 .nav-link {
     color: white!important;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
+    height: 3rem;
     font-style: normal;
     font-size: large;
     text-decoration: none;
 }
 .navbar {
-    background-color: #EBA31D;
+    background-color: #161616;
     background-size: cover;
     text-shadow: 5px 5px #1F1E1E;
 }
@@ -133,7 +145,7 @@ img {
     }
 
 .footer {
-    background-color: #A9A9A9;
+    background-color: #161616;
     color: white!important;
     font-family: titling-gothic-fb-wide, sans-serif;
     font-weight: 700;
@@ -180,9 +192,10 @@ form {
 .soonspins-card {
   width: fit-content;
   border-width: 0px;
-  background-color: #F74209!important;
+  background-color: #232323!important;
   background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
   border-radius: 0px;
+  box-shadow: 0 0 10px black;
   border-color: white;
   padding: 20px;
   margin: 10px;
@@ -291,8 +304,20 @@ input[type=range].my-slider {
     }
   }
 
+iframe{
+  width: 100%;
+  bottom: -1px;
+  left: 0;
+  position: fixed;
+
+}
+
   .audio-player {
       padding: 15px;
+      bottom: -1px;
+      left: 0;
+      position: fixed;
+      background-color: #232323;
       #forward-icon {
           display: none;
           content: url("https://storage.cloud.google.com/soonspins_site_images/fast-forward.svg?authuser=2")!important;
@@ -302,17 +327,20 @@ input[type=range].my-slider {
           content: url("https://storage.cloud.google.com/soonspins_site_images/rewind.svg?authuser=2")!important;
       }
       #volume-icon {
-          content: url("volume.svg")!important;
+          // content: url("volume.svg")!important;
           margin-right: 5px;
+          display: none;
       }
       #loop-icon {
           display: none;
       }
       #volume {
           margin-right: 5px;
+          display: none;
           cursor: pointer;
       }
       #play {
+        color: #e4e4e4;
           cursor: pointer;
       }
       .marquee {

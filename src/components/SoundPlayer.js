@@ -15,8 +15,9 @@ const SoundPlayer = (props) => {
 
     return(
         <Container id="audioContainer" fluid style={{backgroundColor: "#f74209", border: "5px solid black"}}>
-            <AudioPlayer 
+            <AudioPlayer
       audioFiles={playlist}
+      autoPlay={true}
       playerWidth="100%"
       fontSize="1.5rem"
       iconSize="1.5rem"
@@ -28,9 +29,7 @@ const SoundPlayer = (props) => {
     />
         </Container>
     );
-    
+
 }
 
 export default SoundPlayer
-
-  
