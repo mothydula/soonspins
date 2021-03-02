@@ -12,6 +12,7 @@ import { Player } from 'video-react';
 import { BrowserView, MobileView } from 'react-device-detect';
 import SoundPlayer from './SoundPlayer'
 import $ from "jquery";
+import { createBrowserHistory as history} from 'history';
 const Body = () => {
   const [index, setIndex] = useState(0);
   const [timerToggle, setTimerToggle] = useState(true)
@@ -196,6 +197,7 @@ const Body = () => {
         <Container fluid id="main-carousel" className="no-gutters" style={{ width: "100%", height: "50%", overflow:"auto" }}>
           <Carousel activeIndex={index} onSelect={handleSelect} interval={5000}>
             {mixCloudPayload.map((contentObject, index) => (
+
               <Carousel.Item style={{ width: "100%"}} id={index}>
 
                 <img
@@ -515,35 +517,30 @@ const Body = () => {
               </Card>
             </Row>
           ))}
+
           {contentPayload.map((contentObject, index) => (
+            <a href="https://soonspins.com/livestream">
             <Row>
-            {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudioMobile([
-              {
-                src: contentObject['content_url'],
-                title: contentObject['content_title'],
-                artist: contentObject['content_title']
-              },
-            ], "#button")} variant="outline-none" id="button">{}
-              <Card className="soonspins-card" >
 
+            <Card className="soonspins-card">
 
-                <Card.Img variant="top" src={contentObject['image_url']} />
-                <Card.Body>
-                  <Card.Title>{contentObject['content_title']}</Card.Title>
-                  <Card.Text>{contentObject['content_description']}</Card.Text>
-                  {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudioMobile([
-                    {
-                      src: contentObject['content_url'],
-                      title: contentObject['content_title'],
-                      artist: contentObject['content_title']
-                    },
-                  ], "#button")} variant="outline-light" id="button">{listenText2}</Button>) : (<Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
-                </Card.Body>
-              </Card>
-
-              </Button>) : (<Button variant="outline-none" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
-            </Row>
-          ))}
+              <Card.Img variant="top"
+                src={contentObject['image_url']} />
+              <Card.Body>
+                <Card.Title>{contentObject['content_title']}</Card.Title>
+                <Card.Text>{contentObject['content_description']}</Card.Text>
+                {(contentObject['content_type'] === "audio") ? (<Button ref={listenRef} onClick={() => playAudioMobile([
+                  {
+                    src: contentObject['content_url'],
+                    title: contentObject['content_title'],
+                    artist: contentObject['content_title']
+                  },
+                ], "#button")} variant="outline-light" id="button">{listenText2}</Button>) : (<Button variant="outline-light" href="https://soonspins.com/livestream" >WATCH NOW</Button>)}
+              </Card.Body>
+            </Card>
+          </Row>
+</a>
+        ))}
           {/*<Row>
             <Card className="soonspins-card">
               <Card.Img variant="top" src="https://storage.googleapis.com/soonspins_site_images/q_mix_pic.jpg" />
